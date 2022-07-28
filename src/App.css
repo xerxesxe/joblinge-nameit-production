@@ -17,7 +17,8 @@
 }
 
 .Name-input {
-  font-size: 9.5rem;
+  display: flex;
+  font-size: 4.5vmax;
   color: #009FE3;
   text-transform: uppercase;
   font-family: Merriweather-Bold, Helvetica, sans-serif;
@@ -36,7 +37,6 @@
 
 .Name-content {
   display: flex;
-  /* font-size: 9.5rem; */
   justify-content: center;
   align-items: center;
   flex-direction: column;
