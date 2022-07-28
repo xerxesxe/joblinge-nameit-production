@@ -5,6 +5,12 @@
   font-size: 64.5%;
 }
 
+@font-face {
+  font-family: 'Merriweather-Bold';
+  src: url('./fonts/Merriweather-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
 .App {
   height: 100%;
   /* display: grid; */
@@ -14,6 +20,7 @@
   font-size: 9.5rem;
   color: #009FE3;
   text-transform: uppercase;
+  font-family: Merriweather-Bold, Helvetica, sans-serif;
 }
 
 .Name-section {
@@ -41,10 +48,21 @@
   background-position:
     0px 0px, 800px bottom;
   background-size: 100%, 80%;
-  animation: AnimateBG 60s ease-in-out infinite alternate;
+  animation-name: Animation1, Animation2;
+  animation-iteration-count: 1, infinite;
+  animation-duration: 60s, 60s;
+  animation-timing-function: ease-out, ease-in-out;
+  animation-direction: alternate, alternate;
+  /* animation: AnimateBG 60s ease-in-out infinite alternate; */
 }
 
-@keyframes AnimateBG {
+@keyframes Animation1 {
+  100% {
+    background-position: -1200px 0px, 500px bottom;
+  }
+}
+
+@keyframes Animation2 {
   100% {
     background-position: -1200px 0px, 500px bottom;
   }

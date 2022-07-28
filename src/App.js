@@ -1,9 +1,10 @@
 
 import './App.css';
+import './fonts/Merriweather-Bold.ttf'
 
 function App() {
   return (
-    <body className="App">
+    <div className="App">
       <section className="Name-section">
         <div className="Name-content">
 
@@ -11,8 +12,7 @@ function App() {
           <h2 className="Name-input">nameit</h2>
         </div>
       </section>
-
-    </body>
+    </div>
   );
 }
 
