@@ -73,3 +73,42 @@
     animation: none;
   }
 }
+
+
+.form {
+  display: flex;
+  margin-bottom: 17px;
+  font-size: 1.5vmax;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.form--input {
+  border-radius: 5px;
+  border: 1px solid #D5D4D8;
+  text-indent: 5px;
+}
+
+.form--button {
+  grid-column: 1 / -1;
+  border-radius: 5px;
+  background: linear-gradient(90.41deg, #711F8D 1.14%, #A818DA 100%);
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 16px;
+}
+
+.name-output {
+  display: flex;
+
+  margin-bottom: 17px;
+  font-size: 16rem;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+}

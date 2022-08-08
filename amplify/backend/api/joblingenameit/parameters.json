@@ -1,0 +1,6 @@
+{
+  "AppSyncApiName": "joblingenameit",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthModeLastUpdated": "2022-08-08T10:51:13.911Z"
+}
