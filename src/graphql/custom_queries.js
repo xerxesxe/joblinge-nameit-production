@@ -1,6 +1,24 @@
+export const filterLastName = /* GraphQL */ `
+query getLastNameFilter($LastNameFilter: String!) {
+  listLastNamesAlls(filter: {all_last: {eq: $LastNameFilter}}) {
+    items {
+      id
+      german_last
+      kurmanji_last
+      persian_last
+      ukrainian_last
+      turkish_last
+      sorani_last
+      pakistani_last
+      arab_last
+    }
+  }
+}
+`;
+
 export const filterFirstName = /* GraphQL */ `
-query getFirstNameFilter($NameFilter: String!) {
-  listFirstNamesAlls(filter: {all_first: {eq: $NameFilter}}) {
+query getFirstNameFilter($FirstNameFilter: String!) {
+  listFirstNamesAlls(filter: {all_first: {eq: $FirstNameFilter}}) {
     items {
       id
       gender_first
@@ -36,6 +54,35 @@ export const listFirstNamesAlls = /* GraphQL */ `
         ukrainian_first
         german_first
         gender_first
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const listLastNamesAlls = /* GraphQL */ `
+  query ListLastNamesAlls(
+    $filter: ModelLastNamesAllFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listLastNamesAlls(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        all_last
+        persian_last
+        arab_last
+        kurmanji_last
+        pakistani_last
+        sorani_last
+        turkish_last
+        ukrainian_last
+        german_last
         createdAt
         updatedAt
         _version
