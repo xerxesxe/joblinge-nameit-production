@@ -91,7 +91,7 @@ export const getFirstNamesAll = /* GraphQL */ `
     getFirstNamesAll(id: $id) {
       id
       all_first
-      persian_last
+      persian_first
       arab_first
       kurmanji_first
       pakistani_first
@@ -118,7 +118,7 @@ export const listFirstNamesAlls = /* GraphQL */ `
       items {
         id
         all_first
-        persian_last
+        persian_first
         arab_first
         kurmanji_first
         pakistani_first
@@ -154,7 +154,7 @@ export const syncFirstNamesAlls = /* GraphQL */ `
       items {
         id
         all_first
-        persian_last
+        persian_first
         arab_first
         kurmanji_first
         pakistani_first
@@ -171,6 +171,60 @@ export const syncFirstNamesAlls = /* GraphQL */ `
       }
       nextToken
       startedAt
+    }
+  }
+`;
+export const searchFirstNamesAlls = /* GraphQL */ `
+  query SearchFirstNamesAlls(
+    $filter: SearchableFirstNamesAllFilterInput
+    $sort: [SearchableFirstNamesAllSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableFirstNamesAllAggregationInput]
+  ) {
+    searchFirstNamesAlls(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        all_first
+        persian_first
+        arab_first
+        kurmanji_first
+        pakistani_first
+        sorani_first
+        turkish_first
+        ukrainian_first
+        german_first
+        gender_first
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
     }
   }
 `;

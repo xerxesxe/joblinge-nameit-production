@@ -1,8 +1,9 @@
 import React from "react"
 import { useState } from 'react';
+import { searchFirstNamesAlls } from './graphql/custom_queries'
 import { filterFirstName } from './graphql/custom_queries';
 import { filterLastName } from './graphql/custom_queries';
-import { API } from 'aws-amplify';
+import { API, graphqlOperation } from 'aws-amplify';
 // import { SelectField } from '@aws-amplify/ui-react';
 
 
@@ -64,15 +65,27 @@ export default function Name() {
 
     //async functions for fetching Names
     const fetchFirstNames = async () => {
-        try {
-            const res = await API.graphql({ query: filterFirstName, variables: { FirstNameFilter: inputNameData.firstName } })
-            const firstNames = res.data.listFirstNamesAlls.items
-            //if nothing fetched set special object
-            firstNames.length === 0 ? setFirstNameData(firstNameEmpty) : setFirstNameData(firstNames)
-
-        } catch (error) {
-            console.log("error on fetching first name")
+        // try {
+        const filter = {
+            all_first: {
+                match: inputNameData.firstName
+            },
         }
+
+        const res = await API.graphql(
+            graphqlOperation(searchFirstNamesAlls, { filter: filter })
+        );
+
+        // const res = await API.graphql({ query: filterFirstName, variables: { FirstNameFilter: inputNameData.firstName } })
+        const firstNames = res.data.searchFirstNamesAlls.items
+        // const firstNames = res.data.listFirstNamesAlls.items
+        console.log(firstNames)
+        //if nothing fetched set special object
+        firstNames.length === 0 ? setFirstNameData(firstNameEmpty) : setFirstNameData(firstNames)
+        console.log(firstNames)
+        // } catch (error) {
+        console.log("error on fetching first name")
+        // }
     }
 
     const fetchLastNames = async () => {
@@ -80,6 +93,7 @@ export default function Name() {
             const res = await API.graphql({ query: filterLastName, variables: { LastNameFilter: inputNameData.lastName } })
             const lastNames = res.data.listLastNamesAlls.items
             lastNames.length === 0 ? setLastNameData(lastNameEmpty) : setLastNameData(lastNames)
+
         } catch (error) {
             console.log("error on fetching last name")
         }

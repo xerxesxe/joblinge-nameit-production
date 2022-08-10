@@ -81,7 +81,7 @@ export const createFirstNamesAll = /* GraphQL */ `
     createFirstNamesAll(input: $input, condition: $condition) {
       id
       all_first
-      persian_last
+      persian_first
       arab_first
       kurmanji_first
       pakistani_first
@@ -106,7 +106,7 @@ export const updateFirstNamesAll = /* GraphQL */ `
     updateFirstNamesAll(input: $input, condition: $condition) {
       id
       all_first
-      persian_last
+      persian_first
       arab_first
       kurmanji_first
       pakistani_first
@@ -131,7 +131,7 @@ export const deleteFirstNamesAll = /* GraphQL */ `
     deleteFirstNamesAll(input: $input, condition: $condition) {
       id
       all_first
-      persian_last
+      persian_first
       arab_first
       kurmanji_first
       pakistani_first
