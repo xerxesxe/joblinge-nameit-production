@@ -1,23 +1,24 @@
 
 import './App.css';
-import './fonts/Merriweather-Bold.ttf'
 import '@aws-amplify/ui-react/styles.css';
 import { Amplify } from 'aws-amplify';
-import Name from "./nameGen"
+import Name from "./components/nameGen"
 import awsconfig from './aws-exports';
+import LogoBar from './components/logobar';
+import Share from './components/sharebuttons';
+
 Amplify.configure(awsconfig);
 
 function App() {
   return (
     <div className="App">
-      <section className="Name-section">
-        <div className="Name-content">
+      <section className="Hero-section">
+        <div className="Hero-section-container">
           <Name />
-
-          {/* <h2 className="Name-input">Coming Soon</h2>
-          <h2 className="Name-input">#nameit</h2> */}
+          <Share />
         </div>
       </section>
+      <LogoBar />
     </div>
   );
 }

@@ -1,27 +1,52 @@
-export const searchQuery = /* GraphQL */ `
-query MySearchQuery($FirstNameFilter: SearchableFirstNamesAllFilterInput)
-{
-  searchFirstNamesAlls(
-    filter: {all_first: {eq: $FirstNameFilter}}) 
-    
-    {
-    items {
-      ukrainian_first
-      turkish_first
-      sorani_first
-      persian_first
-      pakistani_first
-      kurmanji_first
-      german_first
-      gender_first
-      arab_first
-      all_first
-      id
-      _deleted
+export const searchLastNamesAlls = /* GraphQL */ `
+  query SearchLastNamesAlls(
+    $filter: SearchableLastNamesAllFilterInput
+    $sort: [SearchableLastNamesAllSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableLastNamesAllAggregationInput]
+  ) {
+    searchLastNamesAlls(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        all_last
+        persian_last
+        arab_last
+        kurmanji_last
+        pakistani_last
+        sorani_last
+        turkish_last
+        ukrainian_last
+        german_last
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
     }
   }
-  }
 `;
+
 
 export const searchFirstNamesAlls = /* GraphQL */ `
   query SearchFirstNamesAlls(

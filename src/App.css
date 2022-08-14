@@ -1,20 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;1,900&family=Open+Sans:wght@400;700&display=swap');
+
+:root {
+  --primary: #009EE0;
+  --secondary: #FCCEB4;
+  --tertiary: #000000;
+  --quaternary: #005074;
+  --ff-primary: 'Open Sans', sans-serif;
+  --ff-headings: 'Merriweather', serif;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 700;
+  --fw-heading-regular: 400;
+  --fw-heading-medium: 500;
+  --fw-heading-bold: 900;
+
+  --fs-regular: 1.6rem;
+  --fs-medium: 1.8rem;
+  --fs-bold: 2.4rem;
+  --fs-heading-regular: 2.4rem;
+  --fs-heading-medium: 3.2rem;
+  --fs-heading-bold: 4.8rem;
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-size: 64.5%;
+  font: inherit;
 }
 
-@font-face {
-  font-family: 'Merriweather-Bold';
-  src: url('./fonts/Merriweather-Bold.ttf') format('truetype');
-  font-weight: bold;
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
 }
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+
+/* utility classes */
+
+.bg-primary {
+  background: var(--primary);
+}
+
+.bg-secondary {
+  background: var(--secondary);
+}
+
+.container {
+  --max-width: 1280px;
+  --padding: 1rem;
+
+  width: min(var(--max-width), 100% - (var(--padding) * 2));
+  margin-inline: auto;
+}
+
+/* general styles */
+
 
 .App {
   height: 100%;
-  /* display: grid; */
 }
+
 
 .Name-input {
   display: flex;
@@ -27,7 +124,7 @@
   font-family: Merriweather-Bold, Helvetica, sans-serif;
 }
 
-.Name-section {
+.Hero-section {
   background:
     radial-gradient(circle at center,
       rgba(165, 186, 209, 1), rgba(255, 0, 0, 0) 40%),
@@ -36,17 +133,20 @@
     radial-gradient(circle at 70% 25%,
       rgba(236, 209, 205, 1), rgba(0, 255, 0, 0) 35%),
     #DADCD7;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
-.Name-content {
+.Hero-section-container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
   background:
-    url(./cloud_oben.png),
-    url(./cloud_unten.png);
+    url(./assets/cloud_oben.png),
+    url(./assets/cloud_unten.png);
   background-repeat: repeat-x;
   background-position:
     0px 0px, 800px bottom;
@@ -102,4 +202,28 @@
   border: none;
   cursor: pointer;
   padding: 16px;
+}
+
+.explainer {
+  display: flex;
+  margin-bottom: 17px;
+  font-size: 1.5vmax;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.JobLogo-section {
+  height: 5vh;
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  flex-direction: row;
+}
+
+.JobLogo-content1,
+.JobLogo-content2 {
+  padding: 1em 0em;
+  /* margin-left: 2em; */
+  /* flex-shrink: 1; */
 }

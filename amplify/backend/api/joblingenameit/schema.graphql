@@ -1,4 +1,4 @@
-type LastNamesAll @model @auth(rules: [{allow: public}]) {
+type LastNamesAll @model @auth(rules: [{allow: public}]) @searchable {
   id: ID!
   all_last: String
   persian_last: String

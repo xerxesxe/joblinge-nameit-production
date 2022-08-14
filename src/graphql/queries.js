@@ -86,6 +86,59 @@ export const syncLastNamesAlls = /* GraphQL */ `
     }
   }
 `;
+export const searchLastNamesAlls = /* GraphQL */ `
+  query SearchLastNamesAlls(
+    $filter: SearchableLastNamesAllFilterInput
+    $sort: [SearchableLastNamesAllSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableLastNamesAllAggregationInput]
+  ) {
+    searchLastNamesAlls(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        all_last
+        persian_last
+        arab_last
+        kurmanji_last
+        pakistani_last
+        sorani_last
+        turkish_last
+        ukrainian_last
+        german_last
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 export const getFirstNamesAll = /* GraphQL */ `
   query GetFirstNamesAll($id: ID!) {
     getFirstNamesAll(id: $id) {
