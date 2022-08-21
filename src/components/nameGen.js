@@ -1,20 +1,28 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useState } from 'react';
 import { searchFirstNamesAlls } from '../graphql/custom_queries'
 import { searchLastNamesAlls } from '../graphql/custom_queries';
 import { API, graphqlOperation } from 'aws-amplify';
 import { profanity } from '@2toad/profanity';
 import { boeseworte } from '../assets/boesworte';
+import AutosizeInput from 'react-18-input-autosize';
+import button from '../assets/button.svg';
+import Typewriter from 'typewriter-effect';
+import Wolke from '../assets/wolke2.webp';
+import { motion, useAnimation, useAnimationControls } from 'framer-motion';
+import "./nameGen.css"
+
 profanity.addWords(boeseworte);
 
 
-//set state
+
 export default function Name() {
     //create new clas for profanity filter
 
     //set states for first and last name
     const [firstNamesData, setFirstNameData] = useState([])
     const [lastNamesData, setLastNameData] = useState([])
+    const [isInputEmpty, setIsInputEmpty] = useState(true)
     //set states for input fields
     const [inputNameData, setInputNameData] = useState({
         firstName: "",
@@ -26,12 +34,11 @@ export default function Name() {
     const [explainerData, setExplainerData] = useState("Ausländisch klingende Namen werden bei der Jobsuche benachteiligt. Setze ein Zeichen für Chancengleichheit.")
 
 
-    let firstBoese = false
-    let lastBoese = false
+
     const explainerStr = "Ausländisch klingende Namen werden bei der Jobsuche benachteiligt. Setze ein Zeichen für Chancengleichheit."
     //string with template literal
     //new errorfunction for template litera
-    const explainerStrSpecial = "Yay! Dein Name ist so individuell, dass wir kein Match gefunden haben! Wir haben für dich einen zufälligen Namen ausgewählt."
+    const explainerStrSpecial = "*Yay! Dein Name ist so individuell, dass wir keinen Match gefunden haben! Wir haben für dich einen zufälligen Namen ausgewählt."
 
     //first name output if match not found
     const firstNameEmpty = [{
@@ -74,6 +81,7 @@ export default function Name() {
     }]
 
 
+
     function emptyLastFetch() {
         setLastNameData(lastNameEmpty)
         setExplainerData(explainerStrSpecial)
@@ -100,6 +108,7 @@ export default function Name() {
             [name]: name === "languageSelect" ? value : value.toUpperCase()
 
         }))
+
     }
 
     //async functions for fetching Names from API and setting states for first and last name
@@ -115,6 +124,7 @@ export default function Name() {
             );
 
             const firstNames = res.data.searchFirstNamesAlls.items
+
             //if nothing fetched set special object
             firstNames.length === 0 ? emptyFirstFetch() : setFirstNameData(firstNames)
         } catch (error) {
@@ -139,11 +149,10 @@ export default function Name() {
         }
     }
 
-
+    let firstBoese = false
+    let lastBoese = false
     function handleSubmit(event) {
         event.preventDefault()
-        //check for swerwords in first name
-
         firstBoese = profanity.exists(inputNameData.firstName)
         lastBoese = profanity.exists(inputNameData.lastName)
 
@@ -151,6 +160,7 @@ export default function Name() {
             setFirstNameData(firstNameBoese)
             setLastNameData([])
             setExplainerData(explainerStrSpecial)
+            setIsInputEmpty(false)
 
 
         } else {
@@ -158,19 +168,23 @@ export default function Name() {
                 //empty first and lastname state if both are empty
                 setFirstNameData([])
                 setLastNameData([])
+                setIsInputEmpty(true)
             } else if (inputNameData.firstName === "") {
                 //empty firstname state if firstname is empty and fetch lastname
                 setFirstNameData([])
                 fetchLastNames()
+                setIsInputEmpty(false)
 
             } else if (inputNameData.lastName === "") {
                 //empty lastname state if lastname is empty and fetch firstname
                 setLastNameData([])
                 fetchFirstNames()
+                setIsInputEmpty(false)
             } else {
                 //fetch first and lastname
                 fetchFirstNames()
                 fetchLastNames()
+                setIsInputEmpty(false)
             }
 
         }
@@ -179,100 +193,189 @@ export default function Name() {
 
 
     //return output data for first and last name
-    const firstNameOutput = firstNamesData.map(fistName => {
+    const firstNameOutput = firstNamesData.map(firstName => {
         //on error
-
         switch (inputNameData.languageSelect) {
-            case 'arabic':
-                return <h3 key={fistName.id} >{fistName.arab_first}</h3>
-            case 'turkish':
-                return <h3 key={fistName.id} >{fistName.turkish_first}</h3>
-            case 'sorani':
-                return <h3 key={fistName.id} >{fistName.sorani_first}</h3>
-            case 'kurmanji':
-                return <h3 key={fistName.id} >{fistName.kurmanji_first}</h3>
-            case 'pakistani':
-                return <h3 key={fistName.id} >{fistName.pakistani_first}</h3>
-            case 'ukrain':
-                return <h3 key={fistName.id} >{fistName.ukrainian_first}</h3>
-            case 'persian':
-                return <h3 key={fistName.id} >{fistName.persian_first}</h3>
-            case 'german':
-                return <h3 key={fistName.id} >{fistName.german_first}</h3>
-            default:
-                return null
+            case 'arabic': return firstName.arab_first
+            case 'turkish': return firstName.turkish_first
+            case 'sorani': return firstName.sorani_first
+            case 'persian': return firstName.persian_first
+            case 'kurmanji': return firstName.kurmanji_first
+            case 'pakistani': return firstName.pakistani_first
+            case 'german': return firstName.german_first
+            case 'ukrain': return firstName.ukrainian_first
+            default: return null
+
         }
-    })
+    }).toString()
+
+
 
     const lastNameOutput = lastNamesData.map(lastName => {
         switch (inputNameData.languageSelect) {
-            case 'arabic':
-                return <h3 key={lastName.id} >{lastName.arab_last}</h3>
-            case 'turkish':
-                return <h3 key={lastName.id} >{lastName.turkish_last}</h3>
-            case 'sorani':
-                return <h3 key={lastName.id} >{lastName.sorani_last}</h3>
-            case 'kurmanji':
-                return <h3 key={lastName.id} >{lastName.kurmanji_last}</h3>
-            case 'pakistani':
-                return <h3 key={lastName.id} >{lastName.pakistani_last}</h3>
-            case 'ukrain':
-                return <h3 key={lastName.id} >{lastName.ukrainian_last}</h3>
-            case 'persian':
-                return <h3 key={lastName.id} >{lastName.persian_last}</h3>
-            case 'german':
-                return <h3 key={lastName.id} >{lastName.german_last}</h3>
+            case 'arabic': return lastName.arab_last
+            case 'turkish': return lastName.turkish_last
+            case 'sorani': return lastName.sorani_last
+            case 'kurmanji': return lastName.kurmanji_last
+            case 'pakistani': return lastName.pakistani_last
+            case 'ukrain': return lastName.ukrainian_last
+            case 'persian': return lastName.persian_last
+            case 'german': return lastName.german_last
             default:
                 return null
         }
-    })
+    }).toString()
+
+
+    //------------------------------------------framer Motion --------------------------------------------------------------//
+    //callback function for Button returns object if isInputEmty is true
+    const controlsEmpty = useAnimationControls()
+    const controlsNotEmpty = useAnimationControls()
+    const buttonInputValidation = () => {
+
+        if (inputNameData.firstName === "" && inputNameData.lastName === "") {
+            controlsEmpty.start({
+                rotate: [-3, 3, -3, 0],
+                transition: { duration: 0.4 },
+            })
+            return {
+                scale: 0.9,
+                rotate: [-10, 10, -10, 10],
+                transition: {
+                    type: "tween",
+                    duration: 0.5,
+
+                }
+            }
+
+        } else {
+            controlsNotEmpty.start({
+                opacity: [0, 1],
+                transition: { duration: 2.5, ease: "easeInOut" }
+            })
+            return {
+                scale: 0.8,
+                rotate: -360,
+                transition: {
+                    type: "spring"
+                }
+            }
+        }
+    }
+
+    const inputCaretAnimationFirst = () => {
+        if (inputNameData.firstName === "") {
+            return {
+                opacity: [1, 0],
+                transition: { repeat: Infinity, duration: [0.9], ease: "linear" }
+            }
+        }
+        else {
+            return {
+                opacity: [0, 0],
+                transition: { repeat: Infinity, duration: [0.9], ease: "linear" }
+            }
+        }
+    }
+
+
+    const inputCaretAnimationLast = () => {
+        if (inputNameData.lastName === "") {
+            return {
+                opacity: [1, 0],
+                transition: { repeat: Infinity, duration: [0.9], ease: "linear" }
+            }
+        }
+        else {
+            return {
+                opacity: [0, 0],
+                transition: { repeat: Infinity, duration: [0.9], ease: "linear" }
+            }
+        }
+    }
+
 
 
     return (
-        <div className="container">
+        <div className="name-content">
             <div className="form">
-                <input
-                    type="text"
-                    placeholder="Vorname"
-                    className="form--input"
-                    name="firstName"
-                    value={inputNameData.firstName}
-                    onChange={handleChange}
-                />
-                <input
-                    type="text"
-                    placeholder="Nachname"
-                    className="form--input"
-                    name="lastName"
-                    value={inputNameData.lastName}
-                    onChange={handleChange}
-                />
-                <select
-                    id="languageSelect"
-                    value={inputNameData.languageSelect}
-                    onChange={handleChange}
-                    name="languageSelect"
-                >
-                    <option value="arabic">ARABISCH</option>
-                    <option value="turkish">TÜRKISCH</option>
-                    <option value="sorani">SORANI</option>
-                    <option value="kurmanji">KURMANJI</option>
-                    <option value="pakistani">PAKISTANI</option>
-                    <option value="ukrain">UKRAINISCH</option>
-                    <option value="persian">PERSISCH</option>
-                    <option value="german">DEUTSCH</option>
-                </select>
-                <button
-                    className="form--button"
-                    onClick={handleSubmit}
+                <motion.h1 animate={controlsEmpty} className="form--input">
+                    <div className="firstnameInput--wrapper">
+                        <motion.span animate={inputCaretAnimationFirst} className="blinking-caret">|</motion.span>
+                        <AutosizeInput
+                            type="text"
+                            maxLength={16}
+                            placeholder="DEIN VORNAME"
+                            inputClassName="form--input--firstname"
+                            autoFocus={true}
+                            name="firstName"
+                            value={inputNameData.firstName}
+                            onChange={handleChange}
+                            onSubmit={handleSubmit}
+                            style={inputNameData.firstName === "" ? { "caretColor": "transparent" } : { "caretColor": "var(--primary)" }}
+                        /></div>
+                    <div className="lastnameInput--wrapper">
+                        <motion.span animate={inputCaretAnimationLast} className="blinking-caret">|</motion.span>
+                        <AutosizeInput
+                            maxLength={16}
+                            type="text"
+                            placeholder="NACHNAME"
+                            inputClassName="form--input--lastname"
+                            name="lastName"
+                            value={inputNameData.lastName}
+                            onChange={handleChange}
+                            onSubmit={handleSubmit}
+                            style={inputNameData.lastName === "" ? { "caretColor": "transparent" } : { "caretColor": "var(--primary)" }}
+                        /></div>
+                </motion.h1>
 
-                >
-                    Get a Name
-                </button>
+                <div className="form--select--button">
+                    <div className="form--select">
+                        <h3 >heißt auf                        </h3>
+                        <select
+                            id="languageSelect"
+                            value={inputNameData.languageSelect}
+                            onChange={handleChange}
+                            name="languageSelect"
+                            className="form--selector"
+                        >
+                            <option value="arabic">Arabisch</option>
+                            <option value="turkish">Türkisch</option>
+                            <option value="sorani">Sorani</option>
+                            <option value="kurmanji">Kurmanji</option>
+                            <option value="pakistani">Urdu</option>
+                            <option value="ukrain">Ukrainisch</option>
+                            <option value="persian">Persisch</option>
+                            <option value="german">Deutsch</option>
+                        </select>
+
+                    </div>
+                    <button
+
+                        className="form--button"
+                    ><motion.img
+                            src={button}
+                            alt="button for submitting"
+                            onClick={handleSubmit}
+                            whileHover={{
+                                scale: 1.1,
+                                rotate: -15
+                            }}
+                            whileTap={buttonInputValidation}
+
+                            className="form-button-image" />
+
+                    </button>
+
+
+                </div>
             </div>
-            <div className="Name-input">{firstNameOutput}</div>
-            <div className="Name-input">{lastNameOutput}</div>
-            <div className="explainer">{explainerData}</div>
+            <div className="output">
+
+                <motion.h1 className="Name-output" animate={controlsNotEmpty}>{firstNameOutput}</motion.h1>
+                <motion.h1 className="Name-output" animate={controlsNotEmpty}>{lastNameOutput}</motion.h1>
+            </div>
+            <p className="explainer color-darkblue">{explainerData}</p>
         </div>
     )
 }

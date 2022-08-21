@@ -1,0 +1,34 @@
+.JobLogo-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--quinary);
+}
+
+.JobLogo-container {
+
+    height: 6vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+    flex-shrink: 1;
+}
+
+.JobLogo-content1,
+.JobLogo-content2 {
+    padding: 1em 0em;
+    height: 3em;
+}
+
+@media (max-width: 800px) {
+    .JobLogo-container {
+        justify-content: center;
+    }
+
+    .JobLogo-content2 {
+        display: none;
+        /* shrink items to fit into the screen */
+    }
+}

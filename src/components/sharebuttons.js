@@ -1,44 +1,37 @@
 import React from "react";
-// import { useState } from "react";
-
 import {
-    EmailShareButton,
     FacebookShareButton,
-    // InstapaperShareButton,
     LinkedinShareButton
-    // PocketShareButton,
-    // TelegramShareButton,
-    // TwitterShareButton,
-    // WhatsappShareButton
-} from "react-share";
+} from 'next-share';
 
-import {
-    EmailIcon,
-    FacebookIcon,
-    // FacebookMessengerIcon,
-    LinkedinIcon
-    // TelegramIcon,
-    // TwitterIcon,
-    // WhatsappIcon
-} from "react-share";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebookF, faLinkedinIn, faInstagram } from '@fortawesome/free-brands-svg-icons'
+import nameit_hashtag from '../assets/nameit_hashtag.svg';
+import "./sharebuttons.css";
 
 export default function Share() {
 
-    //create an linkedin share button
-
-
 
     return (
-        <div className="share-buttons">
-            <EmailShareButton url="https://joblinge.com" subject="Check out Joblinge!">
-                <EmailIcon size={62} />
-            </EmailShareButton>
-            <FacebookShareButton url="https://joblinge.com" quote="Check out Joblinge!" hashtag="#joblinge">
-                <FacebookIcon size={62} />
-            </FacebookShareButton>
-            <LinkedinShareButton url="https://joblinge.com" title="Check out Joblinge!" description="Check out Joblinge!" source="nameit.joblinge.de" image="'//media.example.com/ 1234567.jpg'/">
-                <LinkedinIcon size={62} />
-            </LinkedinShareButton>
-        </div>
-    );
+        <section className="Share-section" >
+
+            <div className="share-container container">
+                <p className="share-text">Teile die Aktion</p>
+                <img src={nameit_hashtag} alt="hashtag Nameit" className="nameit-image" />
+
+                <div className="share-buttons">
+                    <LinkedinShareButton url={'https://nameit.joblinge.de'} title={'#Nameit'} summary={'#Nameit ist eine Kampagne der JOBLINGE-Initiative.'}>
+                        <FontAwesomeIcon icon={faLinkedinIn} className="smedia-share-btn" />
+                    </LinkedinShareButton>
+
+                    <FontAwesomeIcon icon={faInstagram} className="smedia-share-btn" />
+
+                    <FacebookShareButton url={'https://nameit.joblinge.de'} quote={'#Nameit ist eine Kampagne der JOBLINGE-Initiative.'} hashtag={'#Nameit'}>
+                        <FontAwesomeIcon icon={faFacebookF} className="smedia-share-btn" />
+                    </FacebookShareButton>
+                </div>
+            </div>
+
+        </section>
+    )
 }

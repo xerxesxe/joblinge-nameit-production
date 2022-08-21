@@ -1,10 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;1,900&family=Open+Sans:wght@400;700&display=swap');
 
 :root {
-  --primary: #009EE0;
-  --secondary: #FCCEB4;
-  --tertiary: #000000;
-  --quaternary: #005074;
+  --primary: rgb(0, 158, 224);
+  --secondary: rgb(252, 206, 180);
+  --tertiary: rgb(0, 0, 0);
+  --quaternary: rgb(0, 80, 116);
+  --quinary: rgb(255, 255, 255);
   --ff-primary: 'Open Sans', sans-serif;
   --ff-headings: 'Merriweather', serif;
 
@@ -15,12 +16,14 @@
   --fw-heading-medium: 500;
   --fw-heading-bold: 900;
 
-  --fs-regular: 1.6rem;
-  --fs-medium: 1.8rem;
+  --fs-regular: 1.4rem;
+  --fs-medium: 1.6rem;
   --fs-bold: 2.4rem;
-  --fs-heading-regular: 2.4rem;
-  --fs-heading-medium: 3.2rem;
-  --fs-heading-bold: 4.8rem;
+  --fs-heading-regular: 2.2rem;
+  --fs-heading-medium: 3rem;
+  --fs-heading-bold: 4.6rem;
+
+
 }
 
 /* Box sizing rules */
@@ -86,8 +89,39 @@ svg {
 }
 
 
-
 /* utility classes */
+
+h3 {
+  font-size: clamp(1rem, 5vw, var(--fs-heading-regular));
+  font-weight: var(--fw-heading-regular);
+  font-family: var(--ff-headings);
+  color: var(--primary);
+  font-style: italic;
+}
+
+h2 {
+  font-size: clamp(1rem, 5vw, var(--fs-heading-medium));
+  font-weight: var(--fw-heading-medium);
+  font-family: var(--ff-headings);
+}
+
+h1 {
+  font-size: clamp(1rem, 10vw, var(--fs-heading-bold));
+  font-weight: var(--fw-heading-bold);
+  font-family: var(--ff-headings);
+  color: var(--primary);
+}
+
+p {
+  font-size: clamp(1rem, 5vw, var(--fs-regular));
+  font-weight: var(--fw-regular);
+  font-family: var(--ff-primary);
+  color: var(--quinary);
+}
+
+.bold {
+  font-weight: var(--fw-bold);
+}
 
 .bg-primary {
   background: var(--primary);
@@ -95,6 +129,22 @@ svg {
 
 .bg-secondary {
   background: var(--secondary);
+}
+
+.color-primary {
+  color: var(--primary);
+}
+
+.color-secondary {
+  color: var(--secondary);
+}
+
+.color-darkblue {
+  color: var(--quaternary);
+}
+
+.color-white {
+  color: var(--quinary);
 }
 
 .container {
@@ -105,23 +155,22 @@ svg {
   margin-inline: auto;
 }
 
+
+.flex-justify-center {
+  display: flex;
+  justify-content: center;
+}
+
+
 /* general styles */
 
 
 .App {
   height: 100%;
-}
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  scroll-behavior: smooth;
 
-
-.Name-input {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  font-size: 4.5vw;
-  color: #009FE3;
-  text-transform: uppercase;
-  font-family: Merriweather-Bold, Helvetica, sans-serif;
 }
 
 .Hero-section {
@@ -136,27 +185,45 @@ svg {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;
+  /* paralliar effect */
+
 }
 
 .Hero-section-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  min-height: 100vh;
+  justify-content: space-between;
+  /* hight content plus 20rem */
+  height: min-content;
   background:
     url(./assets/cloud_oben.png),
     url(./assets/cloud_unten.png);
   background-repeat: repeat-x;
   background-position:
     0px 0px, 800px bottom;
-  background-size: 100%, 80%;
+  background-size: 100%, 100%;
   animation-name: Animation1, Animation2;
   animation-iteration-count: 1, infinite;
   animation-duration: 60s, 60s;
   animation-timing-function: ease-out, ease-in-out;
   animation-direction: alternate, alternate;
-  /* animation: AnimateBG 60s ease-in-out infinite alternate; */
+  background-attachment: fixed, fixed;
+
+  /* create parallex effect */
+}
+
+.cloud-banner {
+  width: 100%;
+  justify-self: end;
+  z-index: 100;
+}
+
+
+.Hero-section-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @keyframes Animation1 {
@@ -175,55 +242,4 @@ svg {
   .Name-content {
     animation: none;
   }
-}
-
-
-.form {
-  display: flex;
-  margin-bottom: 17px;
-  font-size: 1.5vmax;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 1em;
-}
-
-.form--input {
-  border-radius: 5px;
-  border: 1px solid #D5D4D8;
-  text-indent: 5px;
-}
-
-.form--button {
-  grid-column: 1 / -1;
-  border-radius: 5px;
-  background: linear-gradient(90.41deg, #711F8D 1.14%, #A818DA 100%);
-  color: white;
-  border: none;
-  cursor: pointer;
-  padding: 16px;
-}
-
-.explainer {
-  display: flex;
-  margin-bottom: 17px;
-  font-size: 1.5vmax;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.JobLogo-section {
-  height: 5vh;
-  display: flex;
-  justify-content: space-around;
-  align-content: center;
-  flex-direction: row;
-}
-
-.JobLogo-content1,
-.JobLogo-content2 {
-  padding: 1em 0em;
-  /* margin-left: 2em; */
-  /* flex-shrink: 1; */
 }

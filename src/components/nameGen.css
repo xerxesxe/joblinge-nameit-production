@@ -1,0 +1,164 @@
+.name-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    margin-top: 4.8rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form--input--firstname::placeholder,
+.form--input--lastname::placeholder {
+    color: var(--primary);
+}
+
+.form--input,
+.form--input--firstname,
+.form--input--lastname {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    outline: none;
+    border: none;
+    background: transparent;
+    font-style: italic;
+    color: var(--primary);
+}
+
+
+.form--select--button {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    align-items: center;
+
+}
+
+.form--select,
+.form--selector {
+    display: flex;
+    grid-column: 2/4;
+    align-items: baseline;
+    justify-content: flex-end;
+    gap: 0.2em;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: clamp(1rem, 5vw, var(--fs-heading-regular));
+    font-weight: var(--fw-heading-regular);
+    font-family: var(--ff-headings);
+    color: var(--primary);
+    font-style: italic;
+}
+
+
+.form--selector {
+    cursor: pointer;
+
+
+}
+
+.form--selector option {
+    cursor: pointer;
+    background: #C1C9D2;
+    color: var(--primary);
+    font-size: clamp(1rem, 3vw, var(--fs-medium));
+}
+
+.form--button {
+    border: none;
+    background: transparent;
+    grid-column: 4;
+    z-index: 0;
+    margin-top: -50px;
+}
+
+.form-button-image {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    filter: drop-shadow(2px 4px 3px rgba(0, 0, 0, 0.3));
+}
+
+.form-button:active {
+    outline: none;
+    border: none;
+}
+
+.output {
+    min-height: 14rem;
+}
+
+.Name-output,
+.Name-output {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-style: italic;
+
+}
+
+.explainer {
+    display: flex;
+    justify-content: center;
+    justify-self: flex-end;
+    align-self: flex-end;
+    max-width: 793px;
+    text-align: center;
+    margin-top: 12rem;
+    margin-bottom: 5rem;
+
+}
+
+
+
+
+/* media queries */
+
+@media (max-width: 800px) {
+
+    .form {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    .form--select,
+    .form--selector {
+        display: flex;
+        grid-column: 1/5;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .form--select--button {
+        flex-flow: column;
+        flex-direction: column;
+    }
+
+    .form-button-image {
+        cursor: pointer;
+        width: 25vw;
+
+    }
+
+    .form--button {
+        grid-column: 2/4;
+        margin-top: 0px;
+    }
+
+    .explainer {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+}
