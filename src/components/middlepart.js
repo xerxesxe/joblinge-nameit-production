@@ -67,7 +67,7 @@ export default function Middle() {
             />
             <div className="Middle-section-bluebox">
                 <div className="Middle-section-bluebox-text">
-                    <h3 className="color-white">ALLES <br /> #EINSTELLUNGSSACHE</h3>
+                    <h3 className="heading-bluebox color-white">ALLES <br /> #EINSTELLUNGSSACHE</h3>
                     <p>Oft werden ausländische Namen bei der Jobsuche benachteiligt. Gegen diese Diskriminierung möchten wir mit unserer Aktion ein Zeichen setzen. Mach mit und teile unsere Motive auf deinen Social Media Profilen.</p>
                 </div>
             </div>

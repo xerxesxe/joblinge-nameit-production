@@ -17,11 +17,11 @@
   --fw-heading-bold: 900;
 
   --fs-regular: 1.4rem;
-  --fs-medium: 1.6rem;
-  --fs-bold: 2.4rem;
-  --fs-heading-regular: 2.2rem;
-  --fs-heading-medium: 3rem;
-  --fs-heading-bold: 4.8rem;
+  --fs-medium: 1.4rem;
+  --fs-bold: 2.2rem;
+  --fs-heading-regular: 1.6rem;
+  --fs-heading-medium: 2.8rem;
+  --fs-heading-bold: 4.2rem;
 
 
 }
@@ -113,7 +113,7 @@ h1 {
 }
 
 p {
-  font-size: clamp(1rem, 5vw, var(--fs-regular));
+  font-size: clamp(1rem, 4vw, var(--fs-regular));
   font-weight: var(--fw-regular);
   font-family: var(--ff-primary);
   color: var(--quinary);
@@ -194,7 +194,7 @@ p {
   flex-direction: column;
   justify-content: space-between;
   /* hight content plus 20rem */
-  max-height: 100vh;
+  height: fit-content;
   background:
     url(./assets/cloud_oben.png),
     url(./assets/cloud_unten.png);

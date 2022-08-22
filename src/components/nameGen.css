@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-self: center;
-    margin-top: 4.8rem;
+    margin-top: 4.6rem;
 }
 
 .form {
@@ -36,17 +36,18 @@
 
 .form--select--button {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 13rem 1fr 13rem;
     align-items: center;
+    justify-items: flex-end;
 
 }
 
 .form--select,
 .form--selector {
     display: flex;
-    grid-column: 2/4;
-    align-items: baseline;
-    justify-self: center;
+    grid-column: 2/3;
+    align-items: center;
+    justify-self: flex-end;
     gap: 0.2em;
     background: transparent;
     border: none;
@@ -75,16 +76,15 @@
 .form--button {
     border: none;
     background: transparent;
-    grid-column: 4;
+    grid-column: 3;
     z-index: 0;
     margin-top: -50px;
 }
 
 .form-button-image {
     cursor: pointer;
-    display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-self: flex-end;
     filter: drop-shadow(2px 4px 3px rgba(0, 0, 0, 0.3));
 }
 
@@ -94,7 +94,7 @@
 }
 
 .output {
-    min-height: 15rem;
+    min-height: 12.6rem;
 }
 
 .Name-output,
@@ -113,8 +113,8 @@
     align-self: flex-end;
     max-width: 793px;
     text-align: center;
-    margin-top: 12rem;
-    margin-bottom: 5rem;
+    margin-top: 6rem;
+    margin-bottom: 2rem;
 
 }
 
@@ -134,10 +134,10 @@
 
     .form--select,
     .form--selector {
-        display: flex;
-        grid-column: 1/5;
-        align-items: flex-start;
-        justify-content: center;
+        grid-column: 1/4;
+        align-self: center;
+        justify-self: center;
+
     }
 
     .form--select--button {
@@ -152,8 +152,9 @@
     }
 
     .form--button {
-        grid-column: 2/4;
+        grid-column: 1/4;
         margin-top: 0px;
+        justify-self: center;
     }
 
     .explainer {
