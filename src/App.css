@@ -194,7 +194,7 @@ p {
   flex-direction: column;
   justify-content: space-between;
   /* hight content plus 20rem */
-  height: min-content;
+  max-height: 100vh;
   background:
     url(./assets/cloud_oben.png),
     url(./assets/cloud_unten.png);
