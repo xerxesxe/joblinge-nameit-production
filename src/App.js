@@ -7,7 +7,8 @@ import awsconfig from './aws-exports';
 import LogoBar from './components/logobar';
 import Share from './components/sharebuttons';
 import Middle from './components/middlepart';
-
+import Contact from './components/contact';
+import Footer from './components/footer';
 
 Amplify.configure(awsconfig);
 
@@ -40,7 +41,9 @@ function App() {
         <LogoBar />
 
         <Middle />
+        <Contact />
       </main >
+      <Footer />
     </div>
 
   );

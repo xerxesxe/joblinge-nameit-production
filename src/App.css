@@ -21,7 +21,7 @@
   --fs-bold: 2.4rem;
   --fs-heading-regular: 2.2rem;
   --fs-heading-medium: 3rem;
-  --fs-heading-bold: 4.6rem;
+  --fs-heading-bold: 4.8rem;
 
 
 }
@@ -185,7 +185,6 @@ p {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
   /* paralliar effect */
 
 }
@@ -202,7 +201,7 @@ p {
   background-repeat: repeat-x;
   background-position:
     0px 0px, 800px bottom;
-  background-size: 100%, 100%;
+  background-size: clamp(100rem, 100vw, 160rem), clamp(100rem, 100vw, 130rem);
   animation-name: Animation1, Animation2;
   animation-iteration-count: 1, infinite;
   animation-duration: 60s, 60s;

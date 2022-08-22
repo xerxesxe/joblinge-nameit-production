@@ -46,7 +46,7 @@
     display: flex;
     grid-column: 2/4;
     align-items: baseline;
-    justify-content: flex-end;
+    justify-self: center;
     gap: 0.2em;
     background: transparent;
     border: none;
@@ -94,7 +94,7 @@
 }
 
 .output {
-    min-height: 14rem;
+    min-height: 15rem;
 }
 
 .Name-output,
