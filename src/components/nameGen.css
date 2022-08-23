@@ -88,10 +88,18 @@
     filter: drop-shadow(2px 4px 3px rgba(0, 0, 0, 0.3));
 }
 
+.form-button-image:active {
+    outline: none;
+    border: none;
+    background: transparent;
+    -webkit-tap-highlight-color: transparent;
+}
+
 .form-button:active {
     outline: none;
     border: none;
     background: transparent;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .output {
