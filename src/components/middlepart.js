@@ -57,7 +57,7 @@ export default function Middle() {
                 className="cloud-image-left"
             />
 
-            <motion.a href="https://joblinge.de" className="download color-primary" whileTap={{ scale: 0.8 }}>DOWNLOAD</motion.a>
+            <motion.a href="https://nxt.joblinge.net/index.php/s/ZFNL2B5ZNxqGTxs" className="download color-primary" whileTap={{ scale: 0.8 }}>DOWNLOAD</motion.a>
             <p className="download-text color-darkblue">Lade noch mehr Statements auf dein Smartphone</p>
             <motion.img
                 variants={variantsCloud}

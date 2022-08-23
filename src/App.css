@@ -63,6 +63,11 @@ a:not([class]) {
   text-decoration-skip-ink: auto;
 }
 
+a:active {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* Make images easier to work with */
 img,
 picture,
