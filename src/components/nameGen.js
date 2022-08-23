@@ -1,5 +1,5 @@
-import React, { useEffect } from "react"
-import { useState } from 'react';
+import React from "react"
+import { useState, useLayoutEffect } from 'react';
 import { searchFirstNamesAlls } from '../graphql/custom_queries'
 import { searchLastNamesAlls } from '../graphql/custom_queries';
 import { API, graphqlOperation } from 'aws-amplify';
@@ -7,9 +7,8 @@ import { profanity } from '@2toad/profanity';
 import { boeseworte } from '../assets/boesworte';
 import AutosizeInput from 'react-18-input-autosize';
 import button from '../assets/button.svg';
-import Typewriter from 'typewriter-effect';
-import Wolke from '../assets/wolke2.webp';
-import { motion, useAnimation, useAnimationControls } from 'framer-motion';
+
+import { motion, useAnimationControls } from 'framer-motion';
 import "./nameGen.css"
 
 profanity.addWords(boeseworte);
@@ -149,9 +148,10 @@ export default function Name() {
         }
     }
 
-    let firstBoese = false
-    let lastBoese = false
+
     function handleSubmit(event) {
+        let firstBoese = false
+        let lastBoese = false
         event.preventDefault()
         firstBoese = profanity.exists(inputNameData.firstName)
         lastBoese = profanity.exists(inputNameData.lastName)
@@ -225,6 +225,7 @@ export default function Name() {
                 return null
         }
     }).toString()
+
 
 
     //------------------------------------------framer Motion --------------------------------------------------------------//

@@ -1,7 +1,7 @@
 .Middle-section {
     display: grid;
     grid-template-columns: 1fr minmax(.1em, 10em) minmax(12em, 68.5em) minmax(.2em, 7em) 1fr;
-    grid-template-rows: 2rem 8.4em 26em 13em auto 6em 12rem;
+    grid-template-rows: 2rem 8.4em 26em 13em auto 6em 10rem;
 
     background: var(--secondary);
     overflow: hidden;
@@ -138,7 +138,7 @@
     }
 
     .Middle-section {
-        grid-template-rows: 2rem 8.4em 28em 13em auto 6em 12rem;
+        grid-template-rows: 2rem 8.4em 28em 13em auto 6em 7rem;
     }
 
 }

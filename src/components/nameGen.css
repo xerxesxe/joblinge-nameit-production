@@ -91,6 +91,7 @@
 .form-button:active {
     outline: none;
     border: none;
+    background: transparent;
 }
 
 .output {

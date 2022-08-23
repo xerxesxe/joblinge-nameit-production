@@ -1,7 +1,6 @@
 import React from "react";
-import Georgina from "../assets/georgina.webp";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF, faLinkedinIn, faInstagram } from '@fortawesome/free-brands-svg-icons'
+import { faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import ContactImage from "../assets/contact.svg";
 

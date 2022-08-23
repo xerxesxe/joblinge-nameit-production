@@ -1,7 +1,7 @@
 .Contact-section {
     display: grid;
-    grid-template-columns: minmax(2em, 1fr) minmax(16em, 23em) minmax(8em, 25em) minmax(16em, 23em) minmax(2em, 1fr);
-    grid-template-rows: 6.3rem auto 2.5rem 2.8rem;
+    grid-template-columns: minmax(2em, 1fr) minmax(2em, 23em) minmax(2em, 25em) minmax(2em, 23em) minmax(2em, 1fr);
+    grid-template-rows: 5.3rem auto 2.5rem 2.8rem;
 
 }
 
@@ -104,7 +104,7 @@
     .Contact-section {
         display: grid;
         grid-template-columns: minmax(2em, 1fr) minmax(7em, 27em) minmax(5em, 27em) minmax(7em, 27em) minmax(2em, 1fr);
-        grid-template-rows: 7.7rem auto 4.1rem 1fr 1fr;
+        grid-template-rows: 6.3rem auto 2.5rem auto 1rem;
 
     }
 
@@ -137,4 +137,6 @@
         min-height: 24rem;
         width: 100%;
     }
+
+
 }
