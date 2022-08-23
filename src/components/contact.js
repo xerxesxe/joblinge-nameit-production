@@ -17,7 +17,7 @@ export default function Contact() {
             </div>
             <img src={ContactImage} alt="contact-decorative-image" className="contact-image" />
             <span className="Contact-info-container">
-                <p className="color-white bold">GEORGINA<br />
+                <p className="contact-heading color-white bold">GEORGINA<br />
                     HEYLAND</p><br />
                 <p>DACHORGANISATION<br />
                     TEAM LEAD<br />

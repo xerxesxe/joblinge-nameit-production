@@ -40,7 +40,8 @@ export default function Middle() {
 
             <motion.img
                 animate={{
-                    y: [0, -8, 0, -8, 0]
+                    y: [30, 15, 30, 15, 30],
+                    rotate: [2, 0, 0, 0, 2]
                 }}
                 transition={{ repeat: Infinity, duration: 15, ease: "easeInOut", rotate: 0 }}
                 src={phoneimage}

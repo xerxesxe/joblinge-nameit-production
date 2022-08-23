@@ -1,7 +1,7 @@
 .Middle-section {
     display: grid;
     grid-template-columns: 1fr minmax(.1em, 10em) minmax(12em, 68.5em) minmax(.2em, 7em) 1fr;
-    grid-template-rows: 2rem 8.4em 26em 13em auto 6em 16rem;
+    grid-template-rows: 2rem 8.4em 26em 13em auto 6em 12rem;
 
     background: var(--secondary);
     overflow: hidden;
@@ -57,7 +57,7 @@
 
 .heading-bluebox {
     font-family: var(--ff-primary);
-    font-size: clamp(1.8rem, 3vw, 2.2rem);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
     font-style: normal;
     margin-bottom: 0.3em;
 }
@@ -74,7 +74,7 @@
     grid-row: 5;
     align-self: center;
     justify-self: center;
-    font-size: clamp(2rem, 7vw, 9rem);
+    font-size: clamp(1rem, 7vw, 9rem);
     letter-spacing: 1.8rem;
     z-index: 1;
     text-decoration: none;
@@ -90,7 +90,7 @@
 .download-text {
     grid-column: 3 / 4;
     grid-row: 6;
-    align-self: center;
+    align-self: flex-start;
     z-index: 1;
 }
 
@@ -127,12 +127,14 @@
     .download {
         grid-row: 4;
         margin-top: 1em;
+        letter-spacing: 1.4rem;
     }
 
     .download-text {
         justify-self: center;
         align-self: center;
         text-align: center;
+
     }
 
     .Middle-section {

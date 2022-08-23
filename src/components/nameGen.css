@@ -36,7 +36,7 @@
 
 .form--select--button {
     display: grid;
-    grid-template-columns: 13rem 1fr 13rem;
+    grid-template-columns: minmax(1rem, 13rem) 1fr minmax(1rem, 13rem);
     align-items: center;
     justify-items: flex-end;
 

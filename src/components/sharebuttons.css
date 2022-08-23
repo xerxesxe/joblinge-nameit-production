@@ -22,7 +22,7 @@
     justify-self: flex-start;
     align-self: center;
     font-family: var(--ff-primary);
-    font-size: clamp(1rem, 3vw, var(--fs-regular));
+    font-size: clamp(0.9rem, 3vw, 1.2rem);
     font-weight: var(--fw-bold);
     text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
 }
@@ -35,7 +35,7 @@
 .smedia-share-btn {
     gap: 0.5em;
     color: var(--quinary);
-    height: clamp(22px, 6vw, 52px);
+    height: clamp(2rem, 6vw, 3.2rem);
     margin-bottom: 1rem;
     padding-right: 0.5em;
     filter: drop-shadow(2px 4px 3px rgba(0, 0, 0, 0.3));
