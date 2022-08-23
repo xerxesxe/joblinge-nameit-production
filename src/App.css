@@ -217,12 +217,12 @@ p {
   /* create parallex effect */
 }
 
-.cloud-banner {
-  width: 100%;
-  justify-self: end;
-  z-index: 100;
+.Share-and-download-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
 }
-
 
 .Hero-section-form {
   display: flex;

@@ -9,13 +9,35 @@ import Share from './components/sharebuttons';
 import Middle from './components/middlepart';
 import Contact from './components/contact';
 import Footer from './components/footer';
+import { createRef } from "react";
+import * as htmlToImage from "html-to-image";
 
 Amplify.configure(awsconfig);
 
+const createFileName = (extension = "", ...names) => {
+  if (!extension) {
+    return "";
+  }
 
+  return `${names.join("")}.${extension}`;
+};
 
 function App() {
+  const ref = createRef(null);
 
+  const takeScreenShot = async (node) => {
+    const dataURI = await htmlToImage.toJpeg(node);
+    return dataURI;
+  };
+
+  const download = (image, { name = "MYNAME_#NAMEIT", extension = "jpg" } = {}) => {
+    const a = document.createElement("a");
+    a.href = image;
+    a.download = createFileName(extension, name);
+    a.click();
+  };
+
+  const downloadScreenshot = () => takeScreenShot(ref.current).then(download);
 
   return (
 
@@ -26,18 +48,13 @@ function App() {
 
           <div className="Hero-section-container" >
 
-            <div className="Hero-section-form container" >
-
+            <div className="Hero-section-form container" ref={ref}>
               <Name />
-
             </div>
-
-            <Share />
-
+            <Share downloadScreenshot={downloadScreenshot} />
           </div>
 
         </section>
-
         <LogoBar />
 
         <Middle />
