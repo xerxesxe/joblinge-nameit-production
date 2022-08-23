@@ -1,7 +1,7 @@
 .Contact-section {
     display: grid;
-    grid-template-columns: minmax(2em, 1fr) minmax(16em, 23em) minmax(8em, 19em) minmax(16em, 23em) minmax(2em, 1fr);
-    grid-template-rows: 7rem auto 4.1rem 1fr 1fr;
+    grid-template-columns: minmax(2em, 1fr) minmax(16em, 23em) minmax(8em, 25em) minmax(16em, 23em) minmax(2em, 1fr);
+    grid-template-rows: 6.3rem auto 2.5rem 2.8rem;
 
 }
 
@@ -13,9 +13,9 @@
     align-items: center;
     padding: 2rem;
     grid-column: 2;
-    grid-row: 2;
+    grid-row: 2/4;
     background-color: var(--secondary);
-    min-height: 32.8rem;
+    min-height: 27.8rem;
     width: 100%;
     border-radius: 4.3rem;
     text-align: center;
@@ -40,7 +40,7 @@
 
 .Contact-info-container {
     grid-column: 4;
-    grid-row: 2;
+    grid-row: 2/4;
     justify-self: end;
     align-self: end;
     z-index: 2;
