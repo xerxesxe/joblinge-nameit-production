@@ -95,6 +95,13 @@ svg {
 
 
 /* utility classes */
+h4 {
+  font-size: clamp(1rem, 3vw, var(--fs-heading-regular));
+  font-weight: var(--fw-heading-regular);
+  font-family: var(--ff-headings);
+  color: var(--primary);
+  font-style: italic;
+}
 
 h3 {
   font-size: clamp(1rem, 5vw, var(--fs-heading-regular));

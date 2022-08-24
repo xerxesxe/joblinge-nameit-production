@@ -5,6 +5,7 @@ import Cloud from "../assets/wolke3.webp";
 import Cloud2 from "../assets/wolke2.webp";
 import RotateText from "../assets/rotateText.svg";
 import { motion } from "framer-motion";
+import { BrowserView, MobileView } from 'react-device-detect';
 
 
 export default function Middle() {
@@ -58,7 +59,8 @@ export default function Middle() {
             />
 
             <motion.a href="https://nxt.joblinge.net/index.php/s/ZFNL2B5ZNxqGTxs" className="download color-primary" whileTap={{ scale: 0.8 }}>DOWNLOAD</motion.a>
-            <p className="download-text color-darkblue">Lade noch mehr Statements auf dein Smartphone</p>
+            <MobileView className="download-text"><p className="download-text color-darkblue">Lade noch mehr Statements auf dein Smartphone</p></MobileView>
+            <BrowserView className="download-text"><p className="download-text color-darkblue">Lade noch mehr Statements auf deinen Computer</p></BrowserView>
             <motion.img
                 variants={variantsCloud}
                 animate="right"

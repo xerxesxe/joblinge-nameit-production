@@ -10,8 +10,11 @@ import { faDownload } from '@fortawesome/free-solid-svg-icons'
 import nameit_hashtag from '../assets/nameit_hashtag.svg';
 import "./sharebuttons.css";
 import { motion } from "framer-motion";
+import { BrowserView } from 'react-device-detect';
 
 export default function Share({ downloadScreenshot, userInputState }) {
+
+
 
     const variantsDownload = {
         enabled: {
@@ -51,7 +54,7 @@ export default function Share({ downloadScreenshot, userInputState }) {
     return (
         <section className="Share-section" >
 
-            <div className="share-container container">
+            <div className="share-container container fourth-step">
 
                 <motion.a
                     variants={variantsDownload}
@@ -62,17 +65,19 @@ export default function Share({ downloadScreenshot, userInputState }) {
                     className="Download-Image"
                     style={{ cursor: userInputState ? 'pointer' : 'not-allowed' }}
                 >
-                    <FontAwesomeIcon
+
+
+                    <BrowserView><FontAwesomeIcon
                         icon={faDownload}
-                        className="smedia-share-btn" />
+                        className="smedia-share-btn" /></BrowserView>
                 </motion.a>
 
                 <p className="share-text">Teile die Aktion</p>
-                <p
+                <BrowserView className="download-image-text"><p
                     style={{ opacity: userInputState ? '1' : '0' }}
                     className="download-image-text">
                     Download
-                </p>
+                </p></BrowserView>
                 <img src={nameit_hashtag} alt="hashtag Nameit" className="nameit-image" />
 
                 <div className="share-buttons">
