@@ -54,6 +54,10 @@
     filter: drop-shadow(2px 4px 3px rgba(0, 0, 0, 0.3));
 }
 
+.smedia-share-btn:hover {
+    scale: 1.2;
+}
+
 
 .Download-Image {
     grid-column: 3;

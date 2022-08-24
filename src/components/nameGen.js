@@ -15,13 +15,12 @@ profanity.addWords(boeseworte);
 
 
 
-export default function Name() {
+export default function Name({ setUserInputState }) {
     //create new clas for profanity filter
 
     //set states for first and last name
     const [firstNamesData, setFirstNameData] = useState([])
     const [lastNamesData, setLastNameData] = useState([])
-    const [isInputEmpty, setIsInputEmpty] = useState(true)
     //set states for input fields
     const [inputNameData, setInputNameData] = useState({
         firstName: "",
@@ -160,7 +159,7 @@ export default function Name() {
             setFirstNameData(firstNameBoese)
             setLastNameData([])
             setExplainerData(explainerStrSpecial)
-            setIsInputEmpty(false)
+            setUserInputState(false)
 
 
         } else {
@@ -168,23 +167,23 @@ export default function Name() {
                 //empty first and lastname state if both are empty
                 setFirstNameData([])
                 setLastNameData([])
-                setIsInputEmpty(true)
+                setUserInputState(false)
             } else if (inputNameData.firstName === "") {
                 //empty firstname state if firstname is empty and fetch lastname
                 setFirstNameData([])
                 fetchLastNames()
-                setIsInputEmpty(false)
+                setUserInputState(true)
 
             } else if (inputNameData.lastName === "") {
                 //empty lastname state if lastname is empty and fetch firstname
                 setLastNameData([])
                 fetchFirstNames()
-                setIsInputEmpty(false)
+                setUserInputState(true)
             } else {
                 //fetch first and lastname
                 fetchFirstNames()
                 fetchLastNames()
-                setIsInputEmpty(false)
+                setUserInputState(true)
             }
 
         }

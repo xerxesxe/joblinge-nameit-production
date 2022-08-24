@@ -9,8 +9,44 @@ import { faFacebookF, faLinkedinIn, faInstagram, faTwitter, faBitcoin } from '@f
 import { faDownload } from '@fortawesome/free-solid-svg-icons'
 import nameit_hashtag from '../assets/nameit_hashtag.svg';
 import "./sharebuttons.css";
+import { animate } from "framer-motion";
+import { motion } from "framer-motion";
 
-export default function Share({ downloadScreenshot }) {
+export default function Share({ downloadScreenshot, userInputState }) {
+
+    const variantsDownload = {
+        enabled: {
+            opacity: 1,
+            y: [0, -20, 10, -10, 8, -6, 4, -2, 0],
+            transition: {
+                duration: 2, type: "spring"
+            }
+        },
+        disabled: {
+            opacity: 0.4
+        },
+        disabledClick: {
+            opacity: 0.4,
+            x: [0, -10, 10, -10, 8, -6, 4, -2, 0],
+            transition: {
+                duration: 0.4, type: "tween"
+            }
+        },
+        enabledClick: {
+            opacity: 1,
+            scale: 0.9,
+            transition: {
+                duration: 0.4, type: "spring"
+            }
+        },
+        enabledHover: {
+            opacity: 1,
+            scale: 1.2,
+            transition: {
+                duration: 0.2, type: "spring"
+            }
+        }
+    };
 
 
     return (
@@ -18,10 +54,26 @@ export default function Share({ downloadScreenshot }) {
 
             <div className="share-container container">
 
-                <a onClick={downloadScreenshot} className="Download-Image">
-                    <FontAwesomeIcon icon={faDownload} className="smedia-share-btn" /></a>
+                <motion.a
+                    variants={variantsDownload}
+                    animate={userInputState ? "enabled" : "disabled"}
+                    onClick={userInputState ? downloadScreenshot : null}
+                    whileTap={userInputState ? "enabledClick" : "disabledClick"}
+                    whileHover={userInputState ? "enabledHover" : "disabledClick"}
+                    className="Download-Image"
+                    style={{ cursor: userInputState ? 'pointer' : 'not-allowed' }}
+                >
+                    <FontAwesomeIcon
+                        icon={faDownload}
+                        className="smedia-share-btn" />
+                </motion.a>
+
                 <p className="share-text">Teile die Aktion</p>
-                <p className="download-image-text">Download</p>
+                <p
+                    style={{ opacity: userInputState ? '1' : '0' }}
+                    className="download-image-text">
+                    Download
+                </p>
                 <img src={nameit_hashtag} alt="hashtag Nameit" className="nameit-image" />
 
                 <div className="share-buttons">
@@ -43,6 +95,6 @@ export default function Share({ downloadScreenshot }) {
 
             </div>
 
-        </section>
+        </section >
     )
 }

@@ -9,7 +9,7 @@ import Share from './components/sharebuttons';
 import Middle from './components/middlepart';
 import Contact from './components/contact';
 import Footer from './components/footer';
-import { createRef } from "react";
+import { createRef, useState } from "react";
 import * as htmlToImage from "html-to-image";
 
 Amplify.configure(awsconfig);
@@ -23,6 +23,8 @@ const createFileName = (extension = "", ...names) => {
 };
 
 function App() {
+
+  const [userInputState, setUserInputState] = useState(false);
   const ref = createRef(null);
 
   const takeScreenShot = async (node) => {
@@ -44,14 +46,14 @@ function App() {
     <div className="App">
 
       <main className="App-main">
-        <section className="Hero-section" >
+        <section className="Hero-section" ref={ref} >
 
           <div className="Hero-section-container" >
 
-            <div className="Hero-section-form container" ref={ref}>
-              <Name />
+            <div className="Hero-section-form container" >
+              <Name setUserInputState={setUserInputState} />
             </div>
-            <Share downloadScreenshot={downloadScreenshot} />
+            <Share downloadScreenshot={downloadScreenshot} userInputState={userInputState} />
           </div>
 
         </section>
