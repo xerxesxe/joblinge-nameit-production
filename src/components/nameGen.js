@@ -1,5 +1,5 @@
 import React from "react"
-import { useState } from 'react';
+import { useState } from "react";
 import { searchFirstNamesAlls } from '../graphql/custom_queries'
 import { searchLastNamesAlls } from '../graphql/custom_queries';
 import { API, graphqlOperation } from 'aws-amplify';
