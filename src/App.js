@@ -9,6 +9,7 @@ import Share from './components/sharebuttons';
 import Middle from './components/middlepart';
 import Contact from './components/contact';
 import Footer from './components/footer';
+import React from "react"
 import { createRef, useState } from "react";
 import * as htmlToImage from "html-to-image";
 
