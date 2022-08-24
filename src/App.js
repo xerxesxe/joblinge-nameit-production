@@ -9,59 +9,52 @@ import Share from './components/sharebuttons';
 import Middle from './components/middlepart';
 import Contact from './components/contact';
 import Footer from './components/footer';
-// import React from 'react';
-// import { createRef, useState } from "react";
+import React from 'react';
+import { createRef, useState } from "react";
 import * as htmlToImage from "html-to-image";
 
 Amplify.configure(awsconfig);
 
-// const createFileName = (extension = "", ...names) => {
-//   if (!extension) {
-//     return "";
-//   }
+const createFileName = (extension = "", ...names) => {
+  if (!extension) {
+    return "";
+  }
 
-//   return `${names.join("")}.${extension}`;
-// };
+  return `${names.join("")}.${extension}`;
+};
 
 function App() {
 
-  // const [userInputState, setUserInputState] = useState(false);
-  // const ref = createRef(null);
+  const [userInputState, setUserInputState] = useState(false);
+  const ref = createRef(null);
 
-  // const takeScreenShot = async (node) => {
-  //   const dataURI = await htmlToImage.toJpeg(node);
-  //   return dataURI;
-  // };
+  const takeScreenShot = async (node) => {
+    const dataURI = await htmlToImage.toJpeg(node);
+    return dataURI;
+  };
 
-  // const download = (image, { name = "MYNAME_#NAMEIT", extension = "jpg" } = {}) => {
-  //   const a = document.createElement("a");
-  //   a.href = image;
-  //   a.download = createFileName(extension, name);
-  //   a.click();
-  // };
+  const download = (image, { name = "MYNAME_#NAMEIT", extension = "jpg" } = {}) => {
+    const a = document.createElement("a");
+    a.href = image;
+    a.download = createFileName(extension, name);
+    a.click();
+  };
 
-  // const downloadScreenshot = () => takeScreenShot(ref.current).then(download);
-
-  // <section className="Hero-section" ref={ref} >
-  //   <Name /> //
-  //   </div>
-  //   <Share downloadScreenshot={downloadScreenshot} userInputState={userInputState} />
-  // </div>
-
+  const downloadScreenshot = () => takeScreenShot(ref.current).then(download);
 
   return (
 
     <div className="App">
 
       <main className="App-main">
-        <section className="Hero-section" >
+        <section className="Hero-section" ref={ref} >
 
           <div className="Hero-section-container" >
 
             <div className="Hero-section-form container" >
-              <Name />
+              <Name setUserInputState={setUserInputState} />
             </div>
-            <Share />
+            <Share downloadScreenshot={downloadScreenshot} userInputState={userInputState} />
           </div>
 
         </section>
