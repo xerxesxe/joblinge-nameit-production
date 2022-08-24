@@ -111,7 +111,7 @@ h2 {
 }
 
 h1 {
-  font-size: clamp(1rem, 10vw, var(--fs-heading-bold));
+  font-size: clamp(1rem, 11vw, var(--fs-heading-bold));
   font-weight: var(--fw-heading-bold);
   font-family: var(--ff-headings);
   color: var(--primary);

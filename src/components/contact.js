@@ -14,7 +14,7 @@ export default function Contact() {
                     <a href="mailto:Georgina.Heyland@joblinge.de"><FontAwesomeIcon icon={faEnvelope} className="Contact-btn-container" /></a> <a href="https://www.linkedin.com/in/georgina-heyland-a7ab2251/"><FontAwesomeIcon icon={faLinkedinIn} className="Contact-btn-container" /></a>
                 </div>
             </div>
-            <img src={ContactImage} alt="contact-decorative-image" className="contact-image" />
+            <img src={ContactImage} alt="contact-decorative" className="contact-image" />
             <span className="Contact-info-container">
                 <p className="contact-heading color-white bold">GEORGINA<br />
                     HEYLAND</p><br />

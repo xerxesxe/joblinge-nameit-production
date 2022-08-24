@@ -5,11 +5,10 @@ import {
 } from 'next-share';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF, faLinkedinIn, faInstagram, faTwitter, faBitcoin } from '@fortawesome/free-brands-svg-icons'
+import { faFacebookF, faLinkedinIn, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faDownload } from '@fortawesome/free-solid-svg-icons'
 import nameit_hashtag from '../assets/nameit_hashtag.svg';
 import "./sharebuttons.css";
-import { animate } from "framer-motion";
 import { motion } from "framer-motion";
 
 export default function Share({ downloadScreenshot, userInputState }) {
