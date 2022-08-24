@@ -1,5 +1,5 @@
 import React from "react"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { searchFirstNamesAlls } from '../graphql/custom_queries'
 import { searchLastNamesAlls } from '../graphql/custom_queries';
 import { API, graphqlOperation } from 'aws-amplify';
@@ -7,6 +7,8 @@ import { profanity } from '@2toad/profanity';
 import { boeseworte } from '../assets/boesworte';
 import AutosizeInput from 'react-18-input-autosize';
 import button from '../assets/button.svg';
+import { useTour } from '@reactour/tour'
+
 
 import { motion, useAnimationControls } from 'framer-motion';
 import "./nameGen.css"
@@ -294,12 +296,35 @@ export default function Name({ setUserInputState }) {
         }
     }
 
-    //------------------------------------------screenshot--------------------------------------------------------------//
+
+    //get the tour guide from local storage
+
+    const [tourGuideUser, setTourGuideUser] = useState(false);
+
+    const { setIsOpen } = useTour()
+
+    useEffect(() => {
+        if (tourGuideUser === true) {
+            setIsOpen(true)
+        }
+    }, [tourGuideUser])
+
+    useEffect(() => {
+        const data = window.localStorage.getItem('TOURGUIDE_NAMEIT');
+        if (data == null) { setTourGuideUser(true) }
+        window.localStorage.setItem('TOURGUIDE_NAMEIT', JSON.stringify(false));
+
+    }, []);
+
+
+
+
+    console.log(tourGuideUser)
 
     return (
         <div className="name-content">
             <div className="form">
-                <motion.h1 animate={controlsEmpty} className="form--input">
+                <motion.h1 animate={controlsEmpty} className="form--input  first-step-b">
                     <div className="firstnameInput--wrapper">
                         <motion.span animate={inputCaretAnimationFirst} className="blinking-caret">|</motion.span>
                         <AutosizeInput
@@ -337,7 +362,7 @@ export default function Name({ setUserInputState }) {
                             value={inputNameData.languageSelect}
                             onChange={handleChange}
                             name="languageSelect"
-                            className="form--selector"
+                            className="form--selector second-step"
                         >
                             <option value="arabic">Arabisch</option>
                             <option value="turkish">Türkisch</option>
@@ -352,7 +377,7 @@ export default function Name({ setUserInputState }) {
                     </div>
                     <button
 
-                        className="form--button"
+                        className="form--button third-step"
                     ><motion.img
                             src={button}
                             alt="button for submitting"
@@ -375,7 +400,7 @@ export default function Name({ setUserInputState }) {
                 <motion.h1 className="Name-output" animate={controlsNotEmpty}>{firstNameOutput}</motion.h1>
                 <motion.h1 className="Name-output" animate={controlsNotEmpty}>{lastNameOutput}</motion.h1>
             </div>
-            <p className="explainer color-darkblue">{explainerData}</p>
+            <p className="explainer color-darkblue first-step-a">{explainerData}</p>
         </div>
     )
 }
