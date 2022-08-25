@@ -8,6 +8,7 @@ import { boeseworte } from '../assets/boesworte';
 import AutosizeInput from 'react-18-input-autosize';
 import button from '../assets/button.svg';
 import { useTour } from '@reactour/tour'
+import nameData from '../assets/nameData.js'
 
 
 import { motion, useAnimationControls } from 'framer-motion';
@@ -28,7 +29,10 @@ function debounce(fn, ms) {
 
 export default function Name({ setUserInputState }) {
     //create new clas for profanity filter
-
+    const [dimensions, setDimensions] = useState({
+        height: window.innerHeight,
+        width: window.innerWidth
+    })
     //set states for first and last name
     const [firstNamesData, setFirstNameData] = useState([])
     const [lastNamesData, setLastNameData] = useState([])
@@ -40,62 +44,36 @@ export default function Name({ setUserInputState }) {
         gender: ""
     })
 
+    //----------------------------------------------handling window resizing for AutosizeInput----------------------------------------------------------------------//
+
+    useEffect(() => {
+        const debouncedHandleResize = debounce(function handleResize() {
+            setDimensions({
+                height: window.innerHeight,
+                width: window.innerWidth
+            })
+        }, 500)
+
+        window.addEventListener('resize', debouncedHandleResize)
+
+        return _ => {
+            window.removeEventListener('resize', debouncedHandleResize)
+
+        }
+    })
+
     const [explainerData, setExplainerData] = useState("Ausländisch klingende Namen werden bei der Jobsuche benachteiligt. Setze ein Zeichen für Chancengleichheit.")
-
-
     const explainerStr = "Ausländisch klingende Namen werden bei der Jobsuche benachteiligt. Setze ein Zeichen für Chancengleichheit."
-    //string with template literal
-    //new errorfunction for template litera
     const explainerStrSpecial = "*Yay! Dein Name ist so individuell, dass wir keinen Match gefunden haben! Wir haben für dich einen zufälligen Namen ausgewählt."
 
-    //first name output if match not found
-    const firstNameEmpty = [{
-        arab_first: "SIYAN*",
-        gender_first: "Neutral",
-        german_first: "TONI*",
-        id: "EmptyFirstname",
-        kurmanji_first: "ARJIN*",
-        pakistani_first: "KANISHI*",
-        persian_first: "JAVADI*",
-        sorani_first: "AJE*",
-        turkish_first: "ZERIN*",
-        ukrainian_first: "SAVVA*",
-    }]
-    //last name output if match not found
-    const lastNameEmpty = [{
-        arab_last: "ALGHAMDI*",
-        gender_last: "MALE",
-        german_last: "MEIER*",
-        id: "EmptylastName",
-        kurmanji_last: "KOÇLARDAN*",
-        pakistani_last: "ABDUL GHANI*",
-        persian_last: "AFSHAR*",
-        sorani_last: "ABDULMALIK*",
-        turkish_last: "YILDIRIM*",
-        ukrainian_last: "KYRYCHENKO*",
-    }]
-    //name output if profanity found
-    const firstNameBoese = [{
-        arab_first: "*@#$%&!",
-        gender_first: "*@#$%&!",
-        german_first: "*@#$%&!",
-        id: "*@#$%&!",
-        kurmanji_first: "*@#$%&!",
-        pakistani_first: "*@#$%&!",
-        persian_first: "*@#$%&!",
-        sorani_first: "*@#$%&!",
-        turkish_first: "*@#$%&!",
-        ukrainian_first: "*@#$%&!",
-    }]
 
-
-
+    //Set Exlainer Text
     function emptyLastFetch() {
-        setLastNameData(lastNameEmpty)
+        setLastNameData(nameData.lastNameEmpty)
         setExplainerData(explainerStrSpecial)
     }
     function emptyFirstFetch() {
-        setFirstNameData(firstNameEmpty)
+        setFirstNameData(nameData.firstNameEmpty)
         setExplainerData(explainerStrSpecial)
     }
 
@@ -119,7 +97,7 @@ export default function Name({ setUserInputState }) {
 
     }
 
-    //async functions for fetching Names from API and setting states for first and last name
+    //async functions for fetching Names from API and setting states for first  name
     const fetchFirstNames = async () => {
         try {
             const filter = {
@@ -140,6 +118,7 @@ export default function Name({ setUserInputState }) {
         }
     }
 
+    //async functions for fetching Names from API and setting states last name
     const fetchLastNames = async () => {
         try {
             const filter = {
@@ -157,16 +136,15 @@ export default function Name({ setUserInputState }) {
         }
     }
 
-
+    //handle submit event for form
     function handleSubmit(event) {
-        // let firstBoese = false
-        // let lastBoese = false
+
         event.preventDefault()
         const firstBoese = profanity.exists(inputNameData.firstName)
         const lastBoese = profanity.exists(inputNameData.lastName)
 
         if (firstBoese || lastBoese) {
-            setFirstNameData(firstNameBoese)
+            setFirstNameData(nameData.firstNameBoese)
             setLastNameData([])
             setExplainerData(explainerStrSpecial)
             setUserInputState(false)
@@ -214,10 +192,8 @@ export default function Name({ setUserInputState }) {
             case 'german': return firstName.german_first
             case 'ukrain': return firstName.ukrainian_first
             default: return null
-
         }
     }).toString()
-
 
 
     const lastNameOutput = lastNamesData.map(lastName => {
@@ -261,7 +237,7 @@ export default function Name({ setUserInputState }) {
         } else {
             controlsNotEmpty.start({
                 opacity: [0, 1],
-                transition: { duration: 2.5, ease: "easeInOut" }
+                transition: { duration: 1.5, ease: "easeInOut" }
             })
             return {
                 scale: 0.8,
@@ -286,7 +262,7 @@ export default function Name({ setUserInputState }) {
         }
     }
 
-    //get the tour guide from local storage
+    //------------------------------------------Tourguide--------------------------------------------------------------//
 
     const [tourGuideUser, setTourGuideUser] = useState(false);
 
@@ -296,6 +272,7 @@ export default function Name({ setUserInputState }) {
         if (tourGuideUser === true) {
             setIsOpen(true)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [tourGuideUser])
 
     useEffect(() => {
@@ -305,30 +282,7 @@ export default function Name({ setUserInputState }) {
 
     }, []);
 
-    //----------------------------------------------handling window resizing for AutosizeInput----------------------------------------------------------------------//
 
-    const [dimensions, setDimensions] = useState({
-        height: window.innerHeight,
-        width: window.innerWidth
-    })
-
-    useEffect(() => {
-        const debouncedHandleResize = debounce(function handleResize() {
-            setDimensions({
-                height: window.innerHeight,
-                width: window.innerWidth
-            })
-        }, 1000)
-
-        window.addEventListener('resize', debouncedHandleResize)
-
-        return _ => {
-            window.removeEventListener('resize', debouncedHandleResize)
-
-        }
-    })
-
-    console.log(dimensions)
 
     return (
         <div className="name-content">

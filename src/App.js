@@ -10,7 +10,7 @@ import Middle from './components/middlepart';
 import Contact from './components/contact';
 import Footer from './components/footer';
 import React from 'react';
-import { createRef, useState, useEffect } from "react";
+import { createRef, useState } from "react";
 import * as htmlToImage from "html-to-image";
 import { TourProvider } from "@reactour/tour";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";

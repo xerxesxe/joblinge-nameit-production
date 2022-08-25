@@ -2,7 +2,7 @@ import { isMobile } from 'react-device-detect';
 
 
 
-export default [
+const stepsArray = [
     {
         selector: '.first-step-a',
         content: () => (
@@ -35,8 +35,10 @@ export default [
             } else {
                 return `Motiv downloaden und auf Social Media teilen!`;
             }
-        }
-
+        },
+        position: 'center',
     }
 
 ]
+
+export default stepsArray;
