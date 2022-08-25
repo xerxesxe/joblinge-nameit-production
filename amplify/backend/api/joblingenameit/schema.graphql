@@ -1,4 +1,4 @@
-type LastNamesAll @model @auth(rules: [{allow: public}]) @searchable {
+type LastNamesAll @model @auth(rules: [{allow: public, operations: [read]}]) @searchable {
   id: ID!
   all_last: String
   persian_last: String
@@ -11,7 +11,7 @@ type LastNamesAll @model @auth(rules: [{allow: public}]) @searchable {
   german_last: String
 }
 
-type FirstNamesAll @model @auth(rules: [{allow: public}]) @searchable {
+type FirstNamesAll @model @auth(rules: [{allow: public, operations: [read]}]) @searchable {
   id: ID!
   all_first: String!
   persian_first: String
