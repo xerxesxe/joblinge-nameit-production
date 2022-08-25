@@ -176,9 +176,3 @@
     }
 
 }
-
-@media (max-width: 550px) {
-    .form--input {
-        flex-wrap: nowrap;
-    }
-}
