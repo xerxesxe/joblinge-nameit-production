@@ -1,6 +1,6 @@
 .Contact-section {
     display: grid;
-    grid-template-columns: minmax(2em, 1fr) minmax(2em, 23em) minmax(2em, 25em) minmax(2em, 23em) minmax(2em, 1fr);
+    grid-template-columns: minmax(1em, 1fr) minmax(1em, 23em) minmax(1em, 25em) minmax(1em, 23em) minmax(1em, 1fr);
     grid-template-rows: 5.3rem auto 2.5rem 2.8rem;
 
 }
@@ -69,43 +69,37 @@
     .Write-me-container {
         grid-column: 2/5;
         grid-row: 2;
-        background-color: var(--secondary);
-        min-height: 43rem;
+        background-color: var(--primary);
         width: 100%;
-        border-radius: 5rem;
         text-align: center;
-        justify-content: end;
+        justify-content: start;
+        min-height: auto;
     }
 
     .Contact-info-container {
         grid-column: 2/5;
-        grid-row: 4;
+        grid-row: 3;
         justify-self: center;
-        align-self: center;
+        align-self: flex-start;
         z-index: 2;
-        margin-right: 0rem;
         text-align: center;
+        padding-bottom: 1rem;
     }
 
     .contact-image {
-        grid-column: 2/5;
-        grid-row: 2;
+        grid-column: 2;
+        grid-row: 1;
         justify-self: center;
         align-self: flex-start;
         z-index: 0;
         margin-top: 1rem;
-        padding: 2rem;
     }
 
-    .write-me-text {
-        z-index: 4;
-    }
 
     .Contact-section {
         display: grid;
-        grid-template-columns: minmax(2em, 1fr) minmax(7em, 27em) minmax(5em, 27em) minmax(7em, 27em) minmax(2em, 1fr);
-        grid-template-rows: 6.3rem auto 2.5rem auto 1rem;
-
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto auto auto;
     }
 
     .write-me-button {
@@ -114,33 +108,43 @@
         align-items: center;
         width: 100%;
         gap: 2em;
-        z-index: 1;
+
     }
 
 }
 
+/* 
 @media (max-width: 660px) {
     .Write-me-container {
         grid-column: 2/5;
         grid-row: 2;
-        background-color: var(--secondary);
+        background-color: var(--primary);
         min-height: 32rem;
         width: 100%;
     }
 }
 
 @media (max-width: 500px) {
+
+    .Contact-section {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto auto auto auto;
+
+    }
+
     .Write-me-container {
-        grid-column: 2/5;
-        grid-row: 2;
-        background-color: var(--secondary);
-        min-height: 26rem;
-        width: 100%;
+        background-color: var(--primary);
+        min-height: 24rem;
+        min-width: 100%;
     }
 
     .contact-image {
-        width: 90%;
+        max-width: 100%;
     }
 
+    .Contact-info-container {
+        padding-bottom: 1rem;
+    }
 
-}
+} */
