@@ -30,21 +30,27 @@ const createFileName = (extension = "", ...names) => {
 
 function App() {
 
+  //disable scroll on body when tour is open
   const disableBody = (target) => disableBodyScroll(target);
   const enableBody = (target) => enableBodyScroll(target);
 
 
   //passing Unput State to Share Component
   const [userInputState, setUserInputState] = useState(false);
+
+  //----------------------------screenshot------------------------------------------------------
+
   //screenshot state for share component
   const ref = createRef(null);
+
+
 
   const takeScreenShot = async (node) => {
     const dataURI = await htmlToImage.toJpeg(node, { imagePlaceholder: "../public/social_media_image.jpg" });
     return dataURI;
   };
 
-  const download = (image, { name = "MYNAME_#NAMEIT", extension = "jpg" } = {}) => {
+  const download = (image, { name = "MYNAME_NAMEIT", extension = "jpg" } = {}) => {
     const a = document.createElement("a");
     a.href = image;
     a.download = createFileName(extension, name);
@@ -54,7 +60,6 @@ function App() {
   const downloadScreenshot = () => takeScreenShot(ref.current).then(download);
 
 
-  //------------------------------------------tour--------------------------------------------------------------//
 
   return (
     <TourProvider

@@ -12,6 +12,7 @@ export default [
                 </p>
             </div>
         ),
+        position: 'center',
     },
     {
         selector: '.first-step-b',
@@ -24,7 +25,7 @@ export default [
     },
     {
         selector: '.third-step',
-        content: `Hier klicken...`
+        content: `Namen generieren...`
     },
     {
         selector: '.fourth-step',
@@ -32,7 +33,7 @@ export default [
             if (isMobile) {
                 return `Motiv screenshoten und auf Social Media teilen 📱`;
             } else {
-                return `Motiv downloaden und auf Social Media teilen`;
+                return `Motiv downloaden und auf Social Media teilen!`;
             }
         }
 

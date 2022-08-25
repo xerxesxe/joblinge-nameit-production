@@ -9,12 +9,20 @@ import { faFacebookF, faLinkedinIn, faInstagram, faTwitter } from '@fortawesome/
 import { faDownload } from '@fortawesome/free-solid-svg-icons'
 import nameit_hashtag from '../assets/nameit_hashtag.svg';
 import "./sharebuttons.css";
-import { motion } from "framer-motion";
+import { motion, useAnimationControls } from "framer-motion";
 import { BrowserView } from 'react-device-detect';
 
 export default function Share({ downloadScreenshot, userInputState }) {
 
-
+    const takeScreenshot = useAnimationControls();
+    const screenshotTaken = () => {
+        takeScreenshot.start({
+            opacity: [0, 1],
+            transition: {
+                duration: 1, type: "tween"
+            }
+        });
+    }
 
     const variantsDownload = {
         enabled: {
@@ -35,11 +43,11 @@ export default function Share({ downloadScreenshot, userInputState }) {
             }
         },
         enabledClick: {
-            opacity: 1,
-            scale: 0.9,
+            opacity: 0,
             transition: {
                 duration: 0.4, type: "spring"
             }
+
         },
         enabledHover: {
             opacity: 1,
@@ -51,6 +59,8 @@ export default function Share({ downloadScreenshot, userInputState }) {
     };
 
 
+
+
     return (
         <section className="Share-section" >
 
@@ -59,8 +69,8 @@ export default function Share({ downloadScreenshot, userInputState }) {
                 <motion.a
                     variants={variantsDownload}
                     animate={userInputState ? "enabled" : "disabled"}
-                    onClick={userInputState ? downloadScreenshot : null}
-                    whileTap={userInputState ? "enabledClick" : "disabledClick"}
+                    onTap={userInputState ? downloadScreenshot : null}
+                    whileTap={userInputState ? ["enabledClick", screenshotTaken] : "disabledClick"}
                     whileHover={userInputState ? "enabledHover" : "disabledClick"}
                     className="Download-Image"
                     style={{ cursor: userInputState ? 'pointer' : 'not-allowed' }}
@@ -73,11 +83,14 @@ export default function Share({ downloadScreenshot, userInputState }) {
                 </motion.a>
 
                 <p className="share-text">Teile die Aktion</p>
-                <BrowserView className="download-image-text"><p
-                    style={{ opacity: userInputState ? '1' : '0' }}
-                    className="download-image-text">
-                    Download
-                </p></BrowserView>
+                <BrowserView className="download-image-text">
+                    <motion.p
+                        style={{ opacity: userInputState ? '1' : '0' }}
+                        animate={takeScreenshot}
+                        className="download-image-text">
+                        Download
+                    </motion.p>
+                </BrowserView>
                 <img src={nameit_hashtag} alt="hashtag Nameit" className="nameit-image" />
 
                 <div className="share-buttons">

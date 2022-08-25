@@ -15,7 +15,16 @@ import "./nameGen.css"
 
 profanity.addWords(boeseworte);
 
-
+function debounce(fn, ms) {
+    let timer
+    return _ => {
+        clearTimeout(timer)
+        timer = setTimeout(_ => {
+            timer = null
+            fn.apply(this, arguments)
+        }, ms)
+    };
+}
 
 export default function Name({ setUserInputState }) {
     //create new clas for profanity filter
@@ -32,7 +41,6 @@ export default function Name({ setUserInputState }) {
     })
 
     const [explainerData, setExplainerData] = useState("Ausländisch klingende Namen werden bei der Jobsuche benachteiligt. Setze ein Zeichen für Chancengleichheit.")
-
 
 
     const explainerStr = "Ausländisch klingende Namen werden bei der Jobsuche benachteiligt. Setze ein Zeichen für Chancengleichheit."
@@ -68,16 +76,16 @@ export default function Name({ setUserInputState }) {
     }]
     //name output if profanity found
     const firstNameBoese = [{
-        arab_first: "@#$%&!",
-        gender_first: "@#$%&!",
-        german_first: "@#$%&!",
-        id: "@#$%&!",
-        kurmanji_first: "@#$%&!",
-        pakistani_first: "@#$%&!",
-        persian_first: "@#$%&!",
-        sorani_first: "@#$%&!",
-        turkish_first: "@#$%&!",
-        ukrainian_first: "@#$%&!",
+        arab_first: "*@#$%&!",
+        gender_first: "*@#$%&!",
+        german_first: "*@#$%&!",
+        id: "*@#$%&!",
+        kurmanji_first: "*@#$%&!",
+        pakistani_first: "*@#$%&!",
+        persian_first: "*@#$%&!",
+        sorani_first: "*@#$%&!",
+        turkish_first: "*@#$%&!",
+        ukrainian_first: "*@#$%&!",
     }]
 
 
@@ -151,11 +159,11 @@ export default function Name({ setUserInputState }) {
 
 
     function handleSubmit(event) {
-        let firstBoese = false
-        let lastBoese = false
+        // let firstBoese = false
+        // let lastBoese = false
         event.preventDefault()
-        firstBoese = profanity.exists(inputNameData.firstName)
-        lastBoese = profanity.exists(inputNameData.lastName)
+        const firstBoese = profanity.exists(inputNameData.firstName)
+        const lastBoese = profanity.exists(inputNameData.lastName)
 
         if (firstBoese || lastBoese) {
             setFirstNameData(firstNameBoese)
@@ -265,37 +273,18 @@ export default function Name({ setUserInputState }) {
         }
     }
 
-    const inputCaretAnimationFirst = () => {
-        if (inputNameData.firstName === "") {
-            return {
-                opacity: [1, 0],
-                transition: { repeat: Infinity, duration: [0.9], ease: "linear" }
-            }
-        }
-        else {
-            return {
-                opacity: [0, 0],
-                transition: { repeat: Infinity, duration: [0.9], ease: "linear" }
-            }
+    //Variants for Carret Animation if isInputEmty is false
+
+    const variantsBlinkingCarret = {
+        blinking: {
+            opacity: [1, 0],
+            transition: { repeat: Infinity, duration: [0.9], ease: "linear" }
+        },
+        notBlinking: {
+            opacity: [0, 0],
+            transition: { repeat: Infinity, duration: [0.9], ease: "linear" }
         }
     }
-
-
-    const inputCaretAnimationLast = () => {
-        if (inputNameData.lastName === "") {
-            return {
-                opacity: [1, 0],
-                transition: { repeat: Infinity, duration: [0.9], ease: "linear" }
-            }
-        }
-        else {
-            return {
-                opacity: [0, 0],
-                transition: { repeat: Infinity, duration: [0.9], ease: "linear" }
-            }
-        }
-    }
-
 
     //get the tour guide from local storage
 
@@ -316,17 +305,38 @@ export default function Name({ setUserInputState }) {
 
     }, []);
 
+    //----------------------------------------------handling window resizing for AutosizeInput----------------------------------------------------------------------//
 
+    const [dimensions, setDimensions] = useState({
+        height: window.innerHeight,
+        width: window.innerWidth
+    })
 
+    useEffect(() => {
+        const debouncedHandleResize = debounce(function handleResize() {
+            setDimensions({
+                height: window.innerHeight,
+                width: window.innerWidth
+            })
+        }, 1000)
 
-    console.log(tourGuideUser)
+        window.addEventListener('resize', debouncedHandleResize)
+
+        return _ => {
+            window.removeEventListener('resize', debouncedHandleResize)
+
+        }
+    })
+
+    console.log(dimensions)
 
     return (
         <div className="name-content">
             <div className="form">
-                <motion.h1 animate={controlsEmpty} className="form--input  first-step-b">
-                    <div className="firstnameInput--wrapper">
-                        <motion.span animate={inputCaretAnimationFirst} className="blinking-caret">|</motion.span>
+
+                <motion.h1 animate={controlsEmpty} className="form--input first-step-b">
+                    <div className="firstnameInput--wrapper ">
+                        <motion.span variants={variantsBlinkingCarret} animate={inputNameData.firstName === "" ? "blinking" : "notBlinking"} className="blinking-caret">|</motion.span>
                         <AutosizeInput
                             type="text"
                             maxLength={16}
@@ -338,9 +348,12 @@ export default function Name({ setUserInputState }) {
                             onChange={handleChange}
                             onSubmit={handleSubmit}
                             style={inputNameData.firstName === "" ? { "caretColor": "transparent" } : { "caretColor": "var(--primary)" }}
-                        /></div>
+                            key={dimensions.width}
+                        />
+                    </div>
+                    <span className="first-step-a"></span>
                     <div className="lastnameInput--wrapper">
-                        <motion.span animate={inputCaretAnimationLast} className="blinking-caret">|</motion.span>
+                        <motion.span variants={variantsBlinkingCarret} animate={inputNameData.lastName === "" ? "blinking" : "notBlinking"} className="blinking-caret">|</motion.span>
                         <AutosizeInput
                             maxLength={16}
                             type="text"
@@ -351,6 +364,7 @@ export default function Name({ setUserInputState }) {
                             onChange={handleChange}
                             onSubmit={handleSubmit}
                             style={inputNameData.lastName === "" ? { "caretColor": "transparent" } : { "caretColor": "var(--primary)" }}
+                            key={dimensions.width}
                         /></div>
                 </motion.h1>
 
@@ -395,12 +409,14 @@ export default function Name({ setUserInputState }) {
 
                 </div>
             </div>
-            <div className="output">
 
+            <div className="output ">
                 <motion.h1 className="Name-output" animate={controlsNotEmpty}>{firstNameOutput}</motion.h1>
                 <motion.h1 className="Name-output" animate={controlsNotEmpty}>{lastNameOutput}</motion.h1>
             </div>
-            <p className="explainer color-darkblue first-step-a">{explainerData}</p>
+
+            <p className="explainer color-darkblue ">{explainerData}</p>
+
         </div>
     )
 }
