@@ -47,6 +47,22 @@ export default function Name({ setUserInputState }) {
     //----------------------------------------------handling window resizing for AutosizeInput----------------------------------------------------------------------//
 
     useEffect(() => {
+        function handleResize() {
+            setDimensions({
+                height: window.innerHeight,
+                width: window.innerWidth
+            })
+        }
+        window.addEventListener('resize', handleResize)
+        return _ => {
+            window.removeEventListener('resize', handleResize)
+        }
+    }, [])
+
+
+
+
+    useEffect(() => {
         const debouncedHandleResize = debounce(function handleResize() {
             setDimensions({
                 height: window.innerHeight,
@@ -263,8 +279,10 @@ export default function Name({ setUserInputState }) {
     }
 
     //------------------------------------------Tourguide--------------------------------------------------------------//
-
+    const [rerender, setRerender] = useState(); // or any state
+    const [afterRender, setAfterRender] = useState();// internal state
     const [tourGuideUser, setTourGuideUser] = useState(false);
+
 
     const { setIsOpen } = useTour()
 
@@ -276,13 +294,17 @@ export default function Name({ setUserInputState }) {
     }, [tourGuideUser])
 
     useEffect(() => {
+        if (!afterRender) return;
         const data = window.localStorage.getItem('TOURGUIDE_NAMEIT');
         if (data == null) { setTourGuideUser(true) }
         window.localStorage.setItem('TOURGUIDE_NAMEIT', JSON.stringify(false));
+        setAfterRender(false);
 
-    }, []);
+    }, [afterRender]);
 
-
+    useEffect(() => {
+        setAfterRender(true); // (1) will be called after DOM rendered
+    }, [rerender]); // or don't set any if you want to listen to all re-render events
 
     return (
         <div className="name-content">
@@ -370,7 +392,9 @@ export default function Name({ setUserInputState }) {
             </div>
 
             <p className="explainer color-darkblue ">{explainerData}</p>
-
+            {setRerender}
         </div>
+
     )
+
 }
