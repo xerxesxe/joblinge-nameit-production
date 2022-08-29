@@ -43,8 +43,7 @@ export default function Name({ setUserInputState }) {
         languageSelect: "arabic",
         gender: ""
     })
-    const [rerender, setRerender] = useState(); // or any state
-    const [afterRender, setAfterRender] = useState();// internal state
+    const [afterRender, setAfterRender] = useState(false);// internal state
     const [tourGuideUser, setTourGuideUser] = useState(false);
 
 
@@ -280,18 +279,22 @@ export default function Name({ setUserInputState }) {
     }, [tourGuideUser])
 
     useEffect(() => {
-        if (!afterRender) return;
         const data = window.localStorage.getItem('TOURGUIDE_NAMEIT');
         if (data == null) { setTourGuideUser(true) }
         window.localStorage.setItem('TOURGUIDE_NAMEIT', JSON.stringify(false));
-        setAfterRender(false);
-
-    }, [afterRender]);
+    }, []);
 
     useEffect(() => {
-        setAfterRender(true); // (1) will be called after DOM rendered
-    }, [rerender]); // or don't set any if you want to listen to all re-render events
-    console.log([dimensions.width, afterRender])
+        const timeoutID = window.setTimeout(() => {
+            setAfterRender(true);
+        }, 1000);
+
+        return () => window.clearTimeout(timeoutID);
+
+        // (1) will be called after DOM rendered
+    }, []); // or don't set any if you want to listen to all re-render events
+
+    console.log(afterRender)
     return (
         <div className="name-content">
             <div className="form">
