@@ -287,14 +287,13 @@ export default function Name({ setUserInputState }) {
     useEffect(() => {
         const timeoutID = window.setTimeout(() => {
             setAfterRender(true);
-        }, 1000);
+        }, 500);
 
         return () => window.clearTimeout(timeoutID);
 
         // (1) will be called after DOM rendered
     }, []); // or don't set any if you want to listen to all re-render events
 
-    console.log(afterRender)
     return (
         <div className="name-content">
             <div className="form">
