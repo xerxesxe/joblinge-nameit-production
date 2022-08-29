@@ -43,8 +43,14 @@ export default function Name({ setUserInputState }) {
         languageSelect: "arabic",
         gender: ""
     })
+    const [afterRender, setAfterRender] = useState(false);// internal state
+    const [tourGuideUser, setTourGuideUser] = useState(false);
 
+
+    const { setIsOpen } = useTour()
     //----------------------------------------------handling window resizing for AutosizeInput----------------------------------------------------------------------//
+
+
 
     useEffect(() => {
         const debouncedHandleResize = debounce(function handleResize() {
@@ -264,9 +270,6 @@ export default function Name({ setUserInputState }) {
 
     //------------------------------------------Tourguide--------------------------------------------------------------//
 
-    const [tourGuideUser, setTourGuideUser] = useState(false);
-
-    const { setIsOpen } = useTour()
 
     useEffect(() => {
         if (tourGuideUser === true) {
@@ -279,10 +282,17 @@ export default function Name({ setUserInputState }) {
         const data = window.localStorage.getItem('TOURGUIDE_NAMEIT');
         if (data == null) { setTourGuideUser(true) }
         window.localStorage.setItem('TOURGUIDE_NAMEIT', JSON.stringify(false));
-
     }, []);
 
+    useEffect(() => {
+        const timeoutID = window.setTimeout(() => {
+            setAfterRender(true);
+        }, 500);
 
+        return () => window.clearTimeout(timeoutID);
+
+        // (1) will be called after DOM rendered
+    }, []); // or don't set any if you want to listen to all re-render events
 
     return (
         <div className="name-content">
@@ -302,7 +312,7 @@ export default function Name({ setUserInputState }) {
                             onChange={handleChange}
                             onSubmit={handleSubmit}
                             style={inputNameData.firstName === "" ? { "caretColor": "transparent" } : { "caretColor": "var(--primary)" }}
-                            key={dimensions.width}
+                            key={[dimensions.width, afterRender]}
                         />
                     </div>
                     <span className="first-step-a"></span>
@@ -318,7 +328,7 @@ export default function Name({ setUserInputState }) {
                             onChange={handleChange}
                             onSubmit={handleSubmit}
                             style={inputNameData.lastName === "" ? { "caretColor": "transparent" } : { "caretColor": "var(--primary)" }}
-                            key={dimensions.width}
+                            key={[dimensions.width, afterRender]}
                         /></div>
                 </motion.h1>
 
@@ -370,7 +380,8 @@ export default function Name({ setUserInputState }) {
             </div>
 
             <p className="explainer color-darkblue ">{explainerData}</p>
-
         </div>
+
     )
+
 }

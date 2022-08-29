@@ -2145,7 +2145,14 @@ export const boeseworte = ["Aalficker",
     "Zyklopenfotze",
     "Zyniker",
     "Zyste",
-    "Zystenfresse"
+    "Zystenfresse",
+    "Hitler",
+    "Bin Laden",
+    "Der Schreckliche",
+    "Jong-il",
+    "Jong-un",
+    "Zedong",
+    "Stalin"
 ]
 
 export default boeseworte
