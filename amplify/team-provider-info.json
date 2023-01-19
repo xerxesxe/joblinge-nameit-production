@@ -10,6 +10,15 @@
       "StackName": "amplify-joblingenameit-allyson-145458",
       "StackId": "arn:aws:cloudformation:eu-central-1:042378473288:stack/amplify-joblingenameit-allyson-145458/15c10f20-0dbc-11ed-a0a3-02aceca6ca70",
       "AmplifyAppId": "dibpzgamw71jj"
+    },
+    "categories": {
+      "auth": {
+        "joblingenameit26341ad5": {},
+        "joblingeNameit": {}
+      },
+      "api": {
+        "joblingenameit": {}
+      }
     }
   },
   "dev": {
