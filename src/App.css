@@ -254,3 +254,17 @@ p {
     animation: none;
   }
 }
+
+.amplify-button[data-variation='primary'] {
+  background: var(--primary);
+}
+
+.amplify-button[data-variation='primary']:hover {
+  background: var(--quaternary);
+}
+
+[data-amplify-authenticator] [data-amplify-footer] {
+  padding-bottom: var(--amplify-components-authenticator-footer-padding-bottom);
+  text-align: center;
+  display: none;
+}

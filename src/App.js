@@ -4,6 +4,7 @@ import '@aws-amplify/ui-react/styles.css';
 import { Amplify } from 'aws-amplify';
 import Name from "./components/nameGen"
 import awsconfig from './aws-exports';
+import { Authenticator } from '@aws-amplify/ui-react';
 import LogoBar from './components/logobar';
 import Share from './components/sharebuttons';
 import Middle from './components/middlepart';
@@ -15,6 +16,10 @@ import * as htmlToImage from "html-to-image";
 import { TourProvider } from "@reactour/tour";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import tourSteps from "./assets/tourSteps";
+import { I18n } from 'aws-amplify';
+import { translations } from '@aws-amplify/ui-react';
+I18n.putVocabularies(translations);
+I18n.setLanguage('de');
 
 
 Amplify.configure(awsconfig);
@@ -62,34 +67,39 @@ function App() {
 
 
   return (
-    <TourProvider
-      steps={tourSteps}
-      scrollSmooth={true}
-      afterOpen={disableBody}
-      beforeClose={enableBody}
-    >
-      <div className="App">
+    <Authenticator loginMechanisms={['username']}
+      variation="modal"
+      hideSignUp={true}>
 
-        <main className="App-main">
-          <section className="Hero-section" ref={ref} >
+      <TourProvider
+        steps={tourSteps}
+        scrollSmooth={true}
+        afterOpen={disableBody}
+        beforeClose={enableBody}
+      >
+        <div className="App">
 
-            <div className="Hero-section-container" >
+          <main className="App-main">
+            <section className="Hero-section" ref={ref} >
 
-              <div className="Hero-section-form container" >
-                <Name setUserInputState={setUserInputState} />
+              <div className="Hero-section-container" >
+
+                <div className="Hero-section-form container" >
+                  <Name setUserInputState={setUserInputState} />
+                </div>
+                <Share downloadScreenshot={downloadScreenshot} userInputState={userInputState} />
               </div>
-              <Share downloadScreenshot={downloadScreenshot} userInputState={userInputState} />
-            </div>
 
-          </section>
-          <LogoBar />
+            </section>
+            <LogoBar />
 
-          <Middle />
-          <Contact />
-        </main >
-        <Footer />
-      </div>
-    </TourProvider >
+            <Middle />
+            <Contact />
+          </main >
+          <Footer />
+        </div>
+      </TourProvider >
+    </Authenticator>
   );
 }
 
